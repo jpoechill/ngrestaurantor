@@ -1,4 +1,4 @@
-Tranportation App (BART)
+Bart App
 
 An offline-first app that allows users to select and display BART station train departure and arrival times.
 
