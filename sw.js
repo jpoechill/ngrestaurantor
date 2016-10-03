@@ -7,8 +7,8 @@ var requiredFiles = [
     'js/setup-sw.js',
     'js/db-controller.js',
     'js/dropdown-action.js',
-    'dist/js/jquery-3.1.1.min.js',
-    'dist/js/bootstrap.min.js'
+    'js/lib/jquery-3.1.1.min.js',
+    'js/lib/bootstrap.min.js'
 ];
 
 // Installing ServiceWorker
@@ -61,6 +61,7 @@ self.addEventListener('fetch', function (event) {
             console.log(parseURL(event.request.url));
             console.log("This url failed to fetch: " + event.request.url);
             console.log("Error. User is not online.")
+            sayHello();
         })
     )
 });
@@ -71,11 +72,11 @@ self.addEventListener('activate', function(event) {
     console.log('[activate] Claiming this ServiceWorker!');
 
     // Open db
-    db.open(function(event){
-        console.log("Opened DB");
-    }).catch(function (e) {
-        console.log("Opening DB failed: " + e);
-    });
+    // db.open(function(event){
+    //     console.log("Opened DB");
+    // }).catch(function (e) {
+    //     console.log("Opening DB failed: " + e);
+    // });
 
     event.waitUntil(self.clients.claim());
 });

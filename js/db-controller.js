@@ -13,20 +13,7 @@ db.open().catch(function (e) {
 
 function loadTrainsInfoFromDB(thisRout) {
     var count = 0;
-    // $("#dbDataTable").empty();
 
-    // db.trains
-    //     .each(function(routName) {
-    //         var rout = routName;
-    //         count++;
-
-    //         var thisHTMLString = "<tr><th scope=\"row\">" + count + "</th><td>" + rout.rout + "</td><td>" + rout.orig + "</td><td>"
-    //             + rout.dest + "</td><td>"+ rout.fare + "</td><td>" + rout.durr + "</td><td>" + rout.times[0].departs + ", " + rout.times[0].arrives + "</td></tr>";
-    //         $('#dbDataTable').append(thisHTMLString);
-    //     }
-    // );
-
-    console.log("Matching");
     db.trains
         .each(function(routName) {
             var rout = routName;
