@@ -19,9 +19,8 @@ function loadTrainsInfoFromDB(thisRout) {
             var rout = routName;
 
             if (rout.rout == thisRout){
+                // Match found
                 count++;
-                // console.log(count);
-                console.log("Match found");
 
                 $('#thisBartDataTable').empty();
 
