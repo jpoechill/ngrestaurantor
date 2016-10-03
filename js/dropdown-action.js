@@ -29,23 +29,18 @@ trainInfoMenu.on('click', 'li a', function(el) {
     arrivalDropdownVal = $('#dropDownTrainInfoSecond').text().trim();
     if (arrivalDropdownVal != "Select Arrival Station") {
 
-        console.log(departureDropdownVal, arrivalDropdownVal);
-
-        thisVal = "";
+        var thisVal = "";
         for (stationKey in stationsJSON) {
-            // console.log(stationKey);
             if (stationsJSON[stationKey] == departureDropdownVal) {
                 thisVal = thisVal + stationKey;
             }
         }
         for (stationKey in stationsJSON) {
-            // console.log(stationKey);
             if (stationsJSON[stationKey] == arrivalDropdownVal) {
                 thisVal = thisVal + stationKey;
             }
         }
 
-        console.log(thisVal);
         loadTrainsInfoFromDB(thisVal);
 
         updateBartDepartures(departureDropdownVal, arrivalDropdownVal);
@@ -72,7 +67,22 @@ trainInfoMenu.on('click', 'li a', function(el) {
     departureDropdownVal = $('#dropDownTrainInfo').text().trim();
     arrivalDropdownVal = $('#dropDownTrainInfoSecond').text().trim();
     if (departureDropdownVal != "Select Departure Station") {
-      updateBartDepartures(departureDropdownVal, arrivalDropdownVal);
+
+        var thisVal = "";
+        for (stationKey in stationsJSON) {
+            if (stationsJSON[stationKey] == departureDropdownVal) {
+                thisVal = thisVal + stationKey;
+            }
+        }
+        for (stationKey in stationsJSON) {
+            if (stationsJSON[stationKey] == arrivalDropdownVal) {
+                thisVal = thisVal + stationKey;
+            }
+        }
+
+        loadTrainsInfoFromDB(thisVal);
+
+        updateBartDepartures(departureDropdownVal, arrivalDropdownVal);
     }
 
         var thisTrainKey;
