@@ -16,7 +16,7 @@ $(document).ready(function(){
 function fetchBartInfo () {
     $.ajax({
         cache: true,
-        url: 'http://api.bart.gov/api/bsa.aspx?cmd=count' + '&key=' + API_Key,
+        url: 'https://api.bart.gov/api/bsa.aspx?cmd=count' + '&key=' + API_Key,
         error: function(data) {
             console.log("There was an error retreiving the JSON.");
         },
@@ -38,7 +38,7 @@ function fetchBartInfo () {
 function fetchBartTrains () {
     $.ajax({
         cache: true,
-        url: 'http://api.bart.gov/api/stn.aspx?cmd=stns' + '&key=' + API_Key,
+        url: 'https://api.bart.gov/api/stn.aspx?cmd=stns' + '&key=' + API_Key,
         error: function(data) {
             console.log("There was an error retreiving the JSON. Using back up.");
 
@@ -76,7 +76,7 @@ function fetchBartTrains () {
 function fetchBartDepartures (orig, dest) {
     $.ajax({
         cache: true,
-        url: 'http://api.bart.gov/api/sched.aspx?cmd=depart&orig=' + orig + '&dest=' + dest + '&date=now&key=' + API_Key + '&b=4&a=4&l=1',
+        url: 'https://api.bart.gov/api/sched.aspx?cmd=depart&orig=' + orig + '&dest=' + dest + '&date=now&key=' + API_Key + '&b=4&a=4&l=1',
         error: function(data) {
             console.log("There was an error retreiving the JSON.");
         },

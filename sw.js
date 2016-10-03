@@ -61,10 +61,8 @@ self.addEventListener('fetch', function (event) {
             console.log('[fetch] Returning from server: ', event.request.url);
             return fetch(event.request);
         }).catch(function(resposne) {
-            console.log("Update here.");
-            // sayHello();
-            // console.log(parseURL(event.request.url));
-            loadTrainsInfoFromDB();
+            // If offline
+            console.log(parseURL(event.request.url));
             console.log("This url failed to fetch: " + event.request.url);
             console.log("Error. User is not online.")
         })
@@ -102,20 +100,6 @@ function loadTrainsInfoFromDB() {
             console.log(thisHTMLString);
         }
     );
-
-    // $('#thisBartDataTable').empty();
-    // db.trains
-    //     .each(function(routName) {
-    //         var rout = routName;
-    //         count++;
-
-    //         var thisHTMLString = "<tr><th scope=\"row\">" + count + "</th><td>" + rout.times[0].departs + "</td><td>" + rout.times[0].arrives + "</td>";
-    //         $('#thisBartDataTable').append(thisHTMLString);
-    //         // var thisHTMLString = "<tr><th scope=\"row\">" + count + "</th><td>" + rout.rout + "</td><td>" + rout.orig + "</td><td>"
-    //         //     + rout.dest + "</td><td>"+ rout.fare + "</td><td>" + rout.durr + "</td><td>" + rout.times[0].departs + ", " + rout.times[0].arrives + "</td></tr>";
-    //         // $('#dbDataTable').append(thisHTMLString);
-    //     }
-    // );
 };
 
 function parseURL(url) {
