@@ -1,5 +1,4 @@
 var cacheName = 'bartor-cache-v2';
-var db = new Dexie("bartorDB");
 var requiredFiles = [
     'index.html',
     'img/unsplash_dots.jpeg',
@@ -15,9 +14,6 @@ var requiredFiles = [
 // Installing ServiceWorker
 self.addEventListener('install', function(event) {
     // openDB();
-    db.version(1).stores({
-        trains: 'rout'
-    });
 
     event.waitUntil(
         caches.open(cacheName)
@@ -83,7 +79,6 @@ self.addEventListener('activate', function(event) {
 
     event.waitUntil(self.clients.claim());
 });
-
 
 function loadTrainsInfoFromDB() {
     var count = 0;
