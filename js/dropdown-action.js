@@ -28,7 +28,27 @@ trainInfoMenu.on('click', 'li a', function(el) {
     departureDropdownVal = $('#dropDownTrainInfo').text().trim();
     arrivalDropdownVal = $('#dropDownTrainInfoSecond').text().trim();
     if (arrivalDropdownVal != "Select Arrival Station") {
-      updateBartDepartures(departureDropdownVal, arrivalDropdownVal);
+
+        console.log(departureDropdownVal, arrivalDropdownVal);
+
+        thisVal = "";
+        for (stationKey in stationsJSON) {
+            // console.log(stationKey);
+            if (stationsJSON[stationKey] == departureDropdownVal) {
+                thisVal = thisVal + stationKey;
+            }
+        }
+        for (stationKey in stationsJSON) {
+            // console.log(stationKey);
+            if (stationsJSON[stationKey] == arrivalDropdownVal) {
+                thisVal = thisVal + stationKey;
+            }
+        }
+
+        console.log(thisVal);
+        loadTrainsInfoFromDB(thisVal);
+
+        updateBartDepartures(departureDropdownVal, arrivalDropdownVal);
     }
 
     var thisTrainKey;
