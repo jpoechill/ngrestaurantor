@@ -25,7 +25,9 @@
     "run-sequence": "^1.2.2",
     "save": "^2.3.0"
   },
+  "main": "dist/index.html",
   "scripts": {
+    "start": "node dist/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
