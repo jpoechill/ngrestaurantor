@@ -27,7 +27,7 @@
     "save": "^2.3.0"
   },
   "scripts": {
-    "heroku-postbuild": "gulp",
+    // "heroku-postbuild": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
