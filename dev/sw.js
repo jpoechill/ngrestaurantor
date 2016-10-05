@@ -1,5 +1,6 @@
-var cacheName = 'bartor-cache-v2';
+var cacheName = 'bartor-cache-v3';
 var requiredFiles = [
+    '/',
     'index.html',
     'img/unsplash_dots.jpeg',
     'css/styles.css',
@@ -71,32 +72,19 @@ self.addEventListener('activate', function(event) {
     console.log('[activate] Activating ServiceWorker!');
     console.log('[activate] Claiming this ServiceWorker!');
 
-    // Open db
-    // db.open(function(event){
-    //     console.log("Opened DB");
-    // }).catch(function (e) {
-    //     console.log("Opening DB failed: " + e);
-    // });
-
-    event.waitUntil(self.clients.claim());
-});
-
-function loadTrainsInfoFromDB() {
-    var count = 0;
-    // $("#dbDataTable").empty();
-
-    db.trains
-        .each(function(routName) {
-            var rout = routName;
-            count++;
-
-            var thisHTMLString = "<tr><th scope=\"row\">" + count + "</th><td>" + rout.rout + "</td><td>" + rout.orig + "</td><td>"
-                + rout.dest + "</td><td>"+ rout.fare + "</td><td>" + rout.durr + "</td><td>" + rout.times[0].departs + ", " + rout.times[0].arrives + "</td></tr>";
-            // $('#dbDataTable').append(thisHTMLString);
-            console.log(thisHTMLString);
-        }
+    // Delete old caches
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+          return Promise.all(
+            cacheNames.filter(function(cacheName) {
+              return cacheName.startsWith('bartor-');
+            }).map(function(cacheName) {
+              return caches.delete(cacheName);
+            })
+          );
+        })
     );
-};
+});
 
 function parseURL(url) {
     var query = url;

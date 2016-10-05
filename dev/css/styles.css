@@ -1,26 +1,21 @@
 .scrollable-menu {
-    height: auto;
-    max-height: 300px;
-    overflow-x: auto;
-    z-index: 2;
-    position: absolute;
-}
+  height: auto;
+  max-height: 300px;
+  overflow-x: auto;
+  z-index: 2;
+  position: absolute; }
 
 .disabled {
- cursor: not-allowed;
-}
+  cursor: not-allowed; }
 
 .disabled {
- pointer-events: none;
-}
+  pointer-events: none; }
 
 .parent-div {
-    position: relative;
-}
+  position: relative; }
 
 .navbar {
-    background-color: black !important;
-}
+  background-color: black !important; }
 
 .info-box1 {
   text-align: center;
@@ -29,8 +24,7 @@
   padding-bottom: 35px;
   border-radius: 8px;
   line-height: 80px;
-  background: rgba(14, 14, 14, .8);
-}
+  background: rgba(14, 14, 14, 0.8); }
 
 .info-box2 {
   text-align: center;
@@ -39,25 +33,21 @@
   padding-bottom: 35px;
   border-radius: 8px;
   line-height: 80px;
-  background: rgba(24, 24, 24, .8);
-}
+  background: rgba(24, 24, 24, 0.8); }
 
 table {
-    max-width: 100%;
-    background-color: rgba(0,0,0, 0.6) !important;
-    font-size: 16px;
-}
+  max-width: 100%;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  font-size: 16px; }
 
 body {
   padding-top: 70px;
-  background: url('../img/unsplash_dots.jpeg') no-repeat center center fixed;
+  background: url("../img/unsplash_dots.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: white;
-}
-
+  color: white; }
 
 /*
  * Off Canvas
@@ -67,39 +57,28 @@ body {
   .row-offcanvas {
     position: relative;
     -webkit-transition: all .25s ease-out;
-         -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-  }
-
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out; }
   .row-offcanvas-right {
-    right: 0;
-  }
-
+    right: 0; }
   .row-offcanvas-left {
-    left: 0;
-  }
-
+    left: 0; }
   .row-offcanvas-right
-  .sidebar-offcanvas {
-    right: -50%; /* 6 columns */
-  }
-
+.sidebar-offcanvas {
+    right: -50%;
+    /* 6 columns */ }
   .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -50%; /* 6 columns */
-  }
-
+.sidebar-offcanvas {
+    left: -50%;
+    /* 6 columns */ }
   .row-offcanvas-right.active {
-    right: 50%; /* 6 columns */
-  }
-
+    right: 50%;
+    /* 6 columns */ }
   .row-offcanvas-left.active {
-    left: 50%; /* 6 columns */
-  }
-
+    left: 50%;
+    /* 6 columns */ }
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 50%; /* 6 columns */
-  }
-}
+    width: 50%;
+    /* 6 columns */ } }

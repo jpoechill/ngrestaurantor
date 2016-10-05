@@ -1,7 +1,7 @@
 // JS doc for Transportation App (BART)
 // API Key: QR4P-5A9K-9K3T-DWE9
 // Test link: http://api.bart.gov/api/bsa.aspx?cmd=count&key=QR4P-5A9K-9K3T-DWE9
-
+// https://api.bart.gov/api/sched.aspx?cmd=depart&orig=woak&dest=mont&date=now&key=QR4P-5A9K-9K3T-DWE9&b=4&a=4&l=1'
 var API_Key = "QR4P-5A9K-9K3T-DWE9";
 
 $(document).ready(function(){
@@ -9,8 +9,23 @@ $(document).ready(function(){
     initCookies();
 
     fetchBartTrains();
+
+    fetchDefaults();
     // loadTrainsInfoFromDB();
 });
+
+function fetchDefaults() {
+    var origDropdown = $('#dropDownTrainInfo');
+    var destDropdown = $('#dropDownTrainInfoSecond');
+
+    origDropdown.text(stationsJSON['woak']);
+    origDropdown.val(stationsJSON['woak']);
+    destDropdown.text(stationsJSON['mont']);
+    destDropdown.val(stationsJSON['mont']);
+
+    loadTrainsInfoFromDB('woakmont');
+    fetchBartDepartures("woak", "mont");
+};
 
 // Basic API Info
 function fetchBartInfo () {

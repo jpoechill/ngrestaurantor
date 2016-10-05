@@ -7,18 +7,8 @@
     <meta http-equiv="Content-Language" content="en">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <title>BARTor App</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Dexie.js framework for IndexedDB -->
-    <script src="js/lib/dexie.js"></script>
-
-    <!-- Custom styles for this template -->
-    <link href="css/styles.css" rel="stylesheet">
   </head>
 
   <body>
@@ -102,36 +92,24 @@
             <h5 style="font-weight: 200; font-style: italic">duration</h5></div>
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-md-12">
-          <table class="table table-hover table-striped table-inverse">
-            <thead>
-              <tr>
-                <th style="width: 5%">#</th>
-                <th style="width: 10%">Route</th>
-                <th style="width: 20%">Orig</th>
-                <th style="width: 20%">Arr</th>
-                <th style="width: 15%">Fare</th>
-                <th style="width: 15%">Durr</th>
-                <th style="width: 15%">Trains</th>
-              </tr>
-            </thead>
-            <tbody class="" id="dbDataTable">
-                <tr><th scope="row">1</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">2</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">3</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">4</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">5</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">6</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">7</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th scope="row">8</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-          </table>
-        </div> -->
       </div>
       <footer style="padding: 0px; margin-top: 0px">
       </footer>
     </div>
+
+
+    <!--build:css css/styles.min.css-->
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!--endbuild-->
+
+    <!--build:js js/main.min.js -->
+
+    <!-- Dexie.js framework for IndexedDB -->
+    <script src="js/lib/dexie.js"></script>
 
     <!-- jQuery Ref, sources -->
     <script src="js/lib/jquery-1.9.1.min.js"></script>
@@ -145,8 +123,11 @@
     <script src="js/lib/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
     <script src="css/bootstrap.min.js"></script>
 
+    <!-- Toast messages -->
+    <script src="js/jquery.toaster.js"></script>
+
     <!-- Bart App -->
     <script src="js/bundle.js"></script>
-
+    <!-- endbuild -->
   </body>
 </html>

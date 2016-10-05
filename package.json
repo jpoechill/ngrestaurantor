@@ -1,23 +1,32 @@
 {
-  "name": "bartor-app",
+  "name": "tranportation-app-bart",
   "version": "1.0.0",
-  "description": "Tranportation App (BART)",
+  "description": "An offline first app, utilizing Bart schedule times",
   "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
-    "gulp-uglifycss": "^1.0.6"
+    "browser-sync": "^2.17.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-uglifycss": "^1.0.6",
+    "gulp-uglify": "^2.0.0",
+    "gulp-rename": "^1.2.2"
   },
   "devDependencies": {
-    "browser-sync": "^2.14.3",
+    "concat": "0.0.1-security",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-concat-css": "^2.3.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.0"
+    "gulp-cache": "^0.4.5",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-useref": "^3.1.2",
+    "run-sequence": "^1.2.2",
+    "save": "^2.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
