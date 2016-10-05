@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "concat": "0.0.1-security",
-    "cssnano": "^3.7.6",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-cache": "^0.4.5",
