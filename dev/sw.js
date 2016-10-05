@@ -62,7 +62,6 @@ self.addEventListener('fetch', function (event) {
             console.log(parseURL(event.request.url));
             console.log("This url failed to fetch: " + event.request.url);
             console.log("Error. User is not online.")
-            sayHello();
         })
     )
 });

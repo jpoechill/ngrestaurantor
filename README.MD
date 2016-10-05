@@ -7,10 +7,10 @@ Topics covered: Service workers, indexedDB (with Dexie.js), BART API.
 ## To install modules:
 1. Run `npm install` in your command line.
 
-## To run in development mode:
-1. Enter `gulp` from the command line.
+## To run app in development mode from development folder:
+1. Enter `gulp serve` from the command line.
 2. Enjoy app.
 
-## To run production:
-1. Enter `gulp build` from the command line.
+## To run app in production mode from production folder:
+1. Enter `gulp serve:build` from the command line.
 2. Enjoy app.

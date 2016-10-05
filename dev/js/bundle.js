@@ -254,10 +254,6 @@ function getCookie(cname) {
   return "";
 };
 
-function sayHello(){
-    console.log("Hello from bundle.js..!");
-}
-
 function initCookies() {
   var thisOrig = getCookie("lastOrigCookie");
   var trainsOBJ = getCookie("theseTrains");

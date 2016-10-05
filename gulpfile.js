@@ -39,6 +39,14 @@ gulp.task('browser-sync', function() {
     });
 });
 
+gulp.task('browser-sync:dist', function() {
+    bs.init({
+        server: {
+            baseDir: "dist"
+        }
+    });
+});
+
 // Watching
 gulp.task('watch', function () {
     gulp.watch("dev/scss/*.scss", ['sass']);
@@ -58,12 +66,6 @@ gulp.task('images', function() {
     .pipe(gulp.dest('dist/img'));
 });
 
-// Clean up dist
-// gulp.task('clean', function() {
-//   return del.sync('dist').then(function(cb) {
-//     return cache.clearAll(cb);
-// });
-
 gulp.task('clean:dist', function() {
   return del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
 });
@@ -77,18 +79,26 @@ gulp.task('useref', function(){
     .pipe(gulp.dest('dist'))
 });
 
+
 // Build Sequences
 // ---------------
 
 // Defaults
 gulp.task('default', function (callback) {
+
   runSequence(['sass', 'browser-sync', 'watch']),
   callback
 });
 
-gulp.task('build', function(callback) {
+// Serve
+gulp.task('serve', function (callback) {
+  runSequence(['sass', 'browser-sync', 'watch']),
+  callback;
+});
+
+gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['sass', 'useref', 'images'],
+        ['sass', 'browser-sync:dist', 'useref', 'images'],
         callback
     )
 });
