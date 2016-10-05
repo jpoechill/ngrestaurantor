@@ -104,7 +104,7 @@ gulp.task('serve', function (callback) {
 
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['sass', 'browser-sync:dist', 'useref', 'images'],
+        ['sass', 'browser-sync:dist', 'move-sw', 'useref', 'images'],
         callback
     )
 });
