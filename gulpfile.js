@@ -79,6 +79,12 @@ gulp.task('useref', function(){
     .pipe(gulp.dest('dist'))
 });
 
+// Move service worker
+gulp.task('move-sw', function() {
+    gulp.src('dev/sw.js')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('dist/'));
+});
 
 // Build Sequences
 // ---------------
