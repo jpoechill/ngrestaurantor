@@ -12,5 +12,5 @@ Topics covered: Service workers, indexedDB (with Dexie.js), BART API.
 2. Enjoy app.
 
 ## To run app in production mode from production folder:
-1. Enter `gulp serve:build` from the command line.
+1. Enter `gulp serve:dist` from the command line.
 2. Enjoy app.
