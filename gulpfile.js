@@ -39,6 +39,10 @@ gulp.task('browser-sync', function() {
     });
 });
 
+gulp.task('delete:mainjs', function() {
+  return del.sync(['dev/js/main.min.js']);
+});
+
 // Scripts
 gulp.task('scripts', function() {
   return gulp.src('dev/js/**/*.js')
@@ -120,15 +124,14 @@ gulp.task('default', function (callback) {
 
 // Development
 gulp.task('serve', function (callback) {
-  runSequence(['sass', 'scripts','browser-sync', 'watch']),
-  callback;
+  runSequence('delete:mainjs', ['sass', 'scripts','browser-sync', 'watch'], callback);
 });
 
 // Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
         ['useref:dist', 'sass', 'move-sw', 'images'],
-        'browser-sync:dist', 
+        'browser-sync:dist',
         callback
     );
 });
