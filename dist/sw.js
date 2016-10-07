@@ -1,9 +1,10 @@
-var cacheName = 'bartor-cache-v3';
+var cacheName = 'bartor-cache-v4';
+var allCaches = [cacheName];
 var requiredFiles = [
     '/',
     'index.html',
     'img/unsplash_dots.jpeg',
-    'css/styles.css',
+    'css/styles.min.css',
     'js/main.min.js'
 ];
 

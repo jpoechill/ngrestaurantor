@@ -91,8 +91,9 @@ gulp.task('useref:dist', function(){
 });
 
 // Browser sync
+var bsDist = require('browser-sync').create();
 gulp.task('browser-sync:dist', function() {
-    bs.init({
+    bsDist.init({
         server: {
             baseDir: "dist"
         }
@@ -111,7 +112,6 @@ gulp.task('move-sw', function() {
 
 // Defaults
 gulp.task('default', function (callback) {
-
   runSequence(['sass', 'browser-sync', 'watch']),
   callback
 });
@@ -127,7 +127,8 @@ gulp.task('serve', function (callback) {
 // Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['sass', 'browser-sync:dist', 'move-sw', 'useref:dist', 'images'],
+        ['useref:dist', 'sass', 'move-sw', 'images'],
+        'browser-sync:dist', 
         callback
-    )
+    );
 });

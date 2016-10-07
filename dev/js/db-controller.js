@@ -13,19 +13,18 @@ db.open().catch(function (e) {
 
 function loadTrainsInfoFromDB(thisRout) {
     var count = 0;
-
+    // console.log("Hello");
     db.trains
         .each(function(routName) {
             var rout = routName;
 
             if (rout.rout == thisRout){
                 // Match found
-                count++;
-
                 $('#thisBartDataTable').empty();
 
                 for (var i = 0; i < rout.times.length; i++) {
-                    var thisHTMLString = "<tr><th scope=\"row\">" + count + "</th><td>" + rout.times[0].departs + "</td><td>" + rout.times[0].arrives + "</td><tr>";
+                    count++
+                    var thisHTMLString = "<tr><th scope=\"row\">" + count + "</th><td>" + rout.times[i].departs + "</td><td>" + rout.times[i].arrives + "</td><tr>";
                     $('#thisBartDataTable').append(thisHTMLString);
                 }
 
