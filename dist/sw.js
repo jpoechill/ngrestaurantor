@@ -38,12 +38,7 @@ self.addEventListener('fetch', function (event) {
             // Find matching request
             if (response) return response;  // From service-worker
             return fetch(event.request);    // From network
-        }).catch(function(resposne) {
-            // If offline
-            console.log(parseURL(event.request.url));
-            console.log("This url failed to fetch: " + event.request.url);
-            console.log("Error. User is not online.")
-        })
+        });
     )
 });
 
