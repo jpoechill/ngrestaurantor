@@ -38,8 +38,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('dev/css/'))
     .pipe(bs.reload({ // Reloading with Browser Sync
       stream: true
-    }))
-    ;
+    }));
 });
 
 gulp.task('delete:mainjs', function() {
@@ -52,7 +51,7 @@ gulp.task('scripts', function() {
     .pipe(concat('main.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('dev/js/'))
+    .pipe(gulp.dest('dev/js/'));
 });
 
 // Useref
@@ -61,7 +60,7 @@ gulp.task('useref', function(){
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dev/123'))
+    .pipe(gulp.dest('dev/123'));
 });
 
 
@@ -94,7 +93,7 @@ gulp.task('useref:dist', function(){
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist'));
 });
 
 // Browser sync
@@ -121,7 +120,7 @@ gulp.task('move-sw', function() {
 gulp.task('default', function (callback) {
   runSequence(['sass', 'browser-sync', 'watch'],
     callback
-  )
+  );
 });
 
 // Serve
