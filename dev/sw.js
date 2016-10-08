@@ -1,4 +1,4 @@
-var cacheName = 'bartor-cache-v1';
+var cacheName = 'bartor-cache-v2';
 var allCaches = [cacheName];
 var requiredFiles = [
     '/',
