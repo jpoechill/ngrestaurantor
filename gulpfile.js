@@ -19,16 +19,6 @@ var runSequence = require('run-sequence');
 // DEVELOPMENT TASKS
 // -----------------
 
-// Sass
-gulp.task('sass', function () {
-  return gulp.src('dev/scss/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dev/css'))
-    .pipe(bs.reload({ // Reloading with Browser Sync
-      stream: true
-    }));
-});
-
 // Set up browser-sync
 var bs = require('browser-sync').create(); // create a browser sync instance.
 gulp.task('browser-sync', function() {
@@ -37,6 +27,19 @@ gulp.task('browser-sync', function() {
             baseDir: "dev"
         }
     });
+});
+
+// Sass
+gulp.task('sass', function () {
+  return gulp.src('dev/scss/**/*.scss')
+    .pipe(sass())
+    .pipe(cssnano())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('dev/css/'))
+    .pipe(bs.reload({ // Reloading with Browser Sync
+      stream: true
+    }))
+    ;
 });
 
 gulp.task('delete:mainjs', function() {
@@ -116,8 +119,9 @@ gulp.task('move-sw', function() {
 
 // Defaults
 gulp.task('default', function (callback) {
-  runSequence(['sass', 'browser-sync', 'watch']),
-  callback
+  runSequence(['sass', 'browser-sync', 'watch'],
+    callback
+  )
 });
 
 // Serve

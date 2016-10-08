@@ -1,4 +1,4 @@
-var cacheName = 'bartor-cache-v4';
+var cacheName = 'bartor-cache-v1';
 var allCaches = [cacheName];
 var requiredFiles = [
     '/',
@@ -38,7 +38,7 @@ self.addEventListener('fetch', function (event) {
             // Find matching request
             if (response) return response;  // From service-worker
             return fetch(event.request);    // From network
-        });
+        })
     )
 });
 
