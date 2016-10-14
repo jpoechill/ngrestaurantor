@@ -23,6 +23,7 @@ function fetchDefaults() {
     destDropdown.text(stationsJSON['mont']);
     destDropdown.val(stationsJSON['mont']);
 
+    // Defaults
     loadTrainsInfoFromDB('woakmont');
     fetchBartDepartures("woak", "mont");
 };

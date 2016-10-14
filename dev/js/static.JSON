@@ -1,0 +1,356 @@
+var restaurantInfoJSON = [
+  {
+    name: "Battambang",
+    rating: 4.2,
+    address: "850 Broadway, Oakland, CA 94607",
+    photo: "",
+    hours: {
+      mond: "8pm - 8pm",
+      tues: "8pm - 8pm",
+      wedn: "8pm - 8pm",
+      thur: "8pm - 8pm",
+      frid: "8pm - 8pm",
+      satr: "8pm - 10pm",
+      sund: "8pm - 10pm",
+    },
+    reviews: [
+      {
+        author: "Srikant Ramakrishnan",
+        rating: 4,
+        dateposted: "1 day ago",
+        review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+      },
+      {
+        author: "David",
+        rating: 5,
+        dateposted: "1 day ago",
+        review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+      },
+      {
+        author: "Miles",
+        rating: 3,
+        dateposted: "4 day ago",
+        review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+      },
+      {
+        author: "Nelson Wong",
+        rating: 4,
+        dateposted: "1 week ago",
+        review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+      },
+      {
+        author: "Paul Parker",
+        rating: 2,
+        dateposted: "1 month ago",
+        review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+      },
+      {
+        author: "Lucy Wu",
+        rating: 1,
+        dateposted: "3 months ago",
+        review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+      },
+      {
+        author: "Naomi Lewis",
+        rating: 4,
+        dateposted: "4 months ago",
+        review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+      }
+    ],
+  },
+  {
+    name: "Cosecha",
+    rating: 4.3,
+    address: "907 Washington St, Oakland, CA 94607",
+    photo: "",
+    hours: {
+      mond: "8pm - 8pm",
+      tues: "8pm - 8pm",
+      wedn: "8pm - 8pm",
+      thur: "8pm - 8pm",
+      frid: "8pm - 8pm",
+      satr: "8pm - 10pm",
+      sund: "8pm - 10pm",
+    },
+    reviews: [
+      {
+        author: "Srikant Ramakrishnan",
+        rating: 4,
+        dateposted: "1 day ago",
+        review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+      },
+      {
+        author: "David",
+        rating: 5,
+        dateposted: "1 day ago",
+        review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+      },
+      {
+        author: "Miles",
+        rating: 3,
+        dateposted: "4 day ago",
+        review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+      },
+      {
+        author: "Nelson Wong",
+        rating: 4,
+        dateposted: "1 week ago",
+        review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+      },
+      {
+        author: "Paul Parker",
+        rating: 2,
+        dateposted: "1 month ago",
+        review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+      },
+      {
+        author: "Lucy Wu",
+        rating: 1,
+        dateposted: "3 months ago",
+        review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+      },
+      {
+        author: "Naomi Lewis",
+        rating: 4,
+        dateposted: "4 months ago",
+        review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+      }
+    ],
+  },
+  {
+    name: "Le Cheval",
+    rating: 4.4,
+    address: "1007 Clay St, Oakland, CA 94607",
+    photo: "",
+    hours: {
+      mond: "8pm - 8pm",
+      tues: "8pm - 8pm",
+      wedn: "8pm - 8pm",
+      thur: "8pm - 8pm",
+      frid: "8pm - 8pm",
+      satr: "8pm - 10pm",
+      sund: "8pm - 10pm",
+    },
+    reviews: [
+      {
+        author: "Srikant Ramakrishnan",
+        rating: 4,
+        dateposted: "1 day ago",
+        review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+      },
+      {
+        author: "David",
+        rating: 5,
+        dateposted: "1 day ago",
+        review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+      },
+      {
+        author: "Miles",
+        rating: 3,
+        dateposted: "4 day ago",
+        review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+      },
+      {
+        author: "Nelson Wong",
+        rating: 4,
+        dateposted: "1 week ago",
+        review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+      },
+      {
+        author: "Paul Parker",
+        rating: 2,
+        dateposted: "1 month ago",
+        review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+      },
+      {
+        author: "Lucy Wu",
+        rating: 1,
+        dateposted: "3 months ago",
+        review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+      },
+      {
+        author: "Naomi Lewis",
+        rating: 4,
+        dateposted: "4 months ago",
+        review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+      }
+    ],
+  },
+  {
+    name: "Tamarindo",
+    rating: 4.3,
+    address: "468 8th St, Oakland, CA 94607",
+    photo: "",
+    hours: {
+      mond: "8pm - 8pm",
+      tues: "8pm - 8pm",
+      wedn: "8pm - 8pm",
+      thur: "8pm - 8pm",
+      frid: "8pm - 8pm",
+      satr: "8pm - 10pm",
+      sund: "8pm - 10pm",
+    },
+    reviews: [
+      {
+        author: "Srikant Ramakrishnan",
+        rating: 4,
+        dateposted: "1 day ago",
+        review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+      },
+      {
+        author: "David",
+        rating: 5,
+        dateposted: "1 day ago",
+        review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+      },
+      {
+        author: "Miles",
+        rating: 3,
+        dateposted: "4 day ago",
+        review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+      },
+      {
+        author: "Nelson Wong",
+        rating: 4,
+        dateposted: "1 week ago",
+        review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+      },
+      {
+        author: "Paul Parker",
+        rating: 2,
+        dateposted: "1 month ago",
+        review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+      },
+      {
+        author: "Lucy Wu",
+        rating: 1,
+        dateposted: "3 months ago",
+        review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+      },
+      {
+        author: "Naomi Lewis",
+        rating: 4,
+        dateposted: "4 months ago",
+        review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+      }
+    ],
+  },
+  {
+    name: "Cafe 817",
+    rating: 3.3,
+    address: "817 Washington St, Oakland, CA 94607",
+    photo: "",
+    hours: {
+      mond: "8pm - 8pm",
+      tues: "8pm - 8pm",
+      wedn: "8pm - 8pm",
+      thur: "8pm - 8pm",
+      frid: "8pm - 8pm",
+      satr: "8pm - 10pm",
+      sund: "8pm - 10pm",
+    },
+    reviews: [
+      {
+        author: "Srikant Ramakrishnan",
+        rating: 4,
+        dateposted: "1 day ago",
+        review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+      },
+      {
+        author: "David",
+        rating: 5,
+        dateposted: "1 day ago",
+        review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+      },
+      {
+        author: "Miles",
+        rating: 3,
+        dateposted: "4 day ago",
+        review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+      },
+      {
+        author: "Nelson Wong",
+        rating: 4,
+        dateposted: "1 week ago",
+        review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+      },
+      {
+        author: "Paul Parker",
+        rating: 2,
+        dateposted: "1 month ago",
+        review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+      },
+      {
+        author: "Lucy Wu",
+        rating: 1,
+        dateposted: "3 months ago",
+        review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+      },
+      {
+        author: "Naomi Lewis",
+        rating: 4,
+        dateposted: "4 months ago",
+        review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+      }
+    ],
+  },
+  {
+      name: "Authentic Bagel Company",
+      rating: 5,
+      address: "463 2nd St., Oakland, CA 94607",
+      photo: "",
+      hours: {
+        mond: "8pm - 8pm",
+        tues: "8pm - 8pm",
+        wedn: "8pm - 8pm",
+        thur: "8pm - 8pm",
+        frid: "8pm - 8pm",
+        satr: "8pm - 10pm",
+        sund: "8pm - 10pm",
+      },
+      reviews: [
+        {
+          author: "Srikant Ramakrishnan",
+          rating: 4,
+          dateposted: "1 day ago",
+          review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+        },
+        {
+          author: "David",
+          rating: 5,
+          dateposted: "1 day ago",
+          review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+        },
+        {
+          author: "Miles",
+          rating: 3,
+          dateposted: "4 day ago",
+          review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+        },
+        {
+          author: "Nelson Wong",
+          rating: 4,
+          dateposted: "1 week ago",
+          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+        },
+        {
+          author: "Paul Parker",
+          rating: 2,
+          dateposted: "1 month ago",
+          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+        },
+        {
+          author: "Lucy Wu",
+          rating: 1,
+          dateposted: "3 months ago",
+          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+        },
+        {
+          author: "Naomi Lewis",
+          rating: 4,
+          dateposted: "4 months ago",
+          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+        }
+      ],
+    }
+];

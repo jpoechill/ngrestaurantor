@@ -19,16 +19,6 @@ var runSequence = require('run-sequence');
 // DEVELOPMENT TASKS
 // -----------------
 
-// Sass
-gulp.task('sass', function () {
-  return gulp.src('dev/scss/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dev/css'))
-    .pipe(bs.reload({ // Reloading with Browser Sync
-      stream: true
-    }));
-});
-
 // Set up browser-sync
 var bs = require('browser-sync').create(); // create a browser sync instance.
 gulp.task('browser-sync', function() {
@@ -39,13 +29,40 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('browser-sync:dist', function() {
-    bs.init({
-        server: {
-            baseDir: "dist"
-        }
-    });
+// Sass
+gulp.task('sass', function () {
+  return gulp.src('dev/scss/**/*.scss')
+    .pipe(sass())
+    .pipe(cssnano())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('dev/css/'))
+    .pipe(bs.reload({ // Reloading with Browser Sync
+      stream: true
+    }));
 });
+
+gulp.task('delete:mainjs', function() {
+  return del.sync(['dev/js/main.min.js']);
+});
+
+// Scripts
+gulp.task('scripts', function() {
+  return gulp.src('dev/js/**/*.js')
+    .pipe(concat('main.js'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('dev/js/'));
+});
+
+// Useref
+gulp.task('useref', function(){
+  return gulp.src('dev/*.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dev/123'));
+});
+
 
 // Watching
 gulp.task('watch', function () {
@@ -71,12 +88,22 @@ gulp.task('clean:dist', function() {
 });
 
 // Useref
-gulp.task('useref', function(){
+gulp.task('useref:dist', function(){
   return gulp.src('dev/*.html')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist'));
+});
+
+// Browser sync
+var bsDist = require('browser-sync').create();
+gulp.task('browser-sync:dist', function() {
+    bsDist.init({
+        server: {
+            baseDir: "dist"
+        }
+    });
 });
 
 // Move service worker
@@ -91,20 +118,23 @@ gulp.task('move-sw', function() {
 
 // Defaults
 gulp.task('default', function (callback) {
-
-  runSequence(['sass', 'browser-sync', 'watch']),
-  callback
+  runSequence(['sass', 'browser-sync', 'watch'],
+    callback
+  );
 });
 
 // Serve
+
+// Development
 gulp.task('serve', function (callback) {
-  runSequence(['sass', 'browser-sync', 'watch']),
-  callback;
+  runSequence('delete:mainjs', ['sass', 'scripts','browser-sync', 'watch'], callback);
 });
 
+// Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['sass', 'browser-sync:dist', 'move-sw', 'useref', 'images'],
+        ['useref:dist', 'sass', 'move-sw', 'images'],
+        'browser-sync:dist',
         callback
-    )
+    );
 });
