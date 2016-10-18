@@ -1,0 +1,112 @@
+<!-- Restuarant Display List -->
+<section ng-init="thisRestr=phones[getRestID(page.pagename)]">
+  <div class="container" style="padding-bottom: 10px;">
+    <div class="row">
+      <!--  Start single item -->
+      <div class="col-lrg-12">
+        <!-- Start header images -->
+        <div class="row">
+          <div class="col-md-3" style="padding: 6px;">
+            <img src="img/footsteps-1.png" width="100%" alt="" />
+          </div>
+          <div class="col-md-3" style="padding: 6px;">
+            <img src="img/food/salad_cut-2.png" width="100%" alt="" />
+          </div>
+          <div class="col-md-3" style="padding: 6px;">
+            <img src="img/food/salad_cut-2.png" width="100%" alt="" />
+          </div>
+          <div class="col-md-3" style="padding: 6px;">
+            <img src="img/food/salad_cut-2.png" width="100%" alt="" />
+          </div>
+        </div>
+        <!-- End header images -->
+        <div class="row">
+          <div class="col-md-9" style="margin-bottom: 18px;">
+            <p>
+              <h5 style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong>{{thisRestr.name}}</strong></h5>
+            </p>
+            <p>
+              <span style="color: #4BE1AB;">★★★★☆</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{thisRestr.rating}}</span> <span class="monty-font-reg">{{thisRestr.reviews.length}} REVIEWS</span>
+            </p>
+            <p>
+              <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
+                <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-map-marker" aria-hidden="true"></i> {{thisRestr.address}}</li>
+              </ul>
+            </p>
+            <p>
+              {{thisRestr.blurb}}
+            </p>
+            <span class="monty-font-reg"><i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i> {{thisRestr.likes}}</li></span>
+          </div>
+          <div class="col-md-3">
+            <p>
+              <h6 style="color: grey; font-size: small;">Hours</h6>
+              <ul style="list-style: none; padding:0; font-size: 13px; color: #333;">
+                <li>Monday <span class="pull-right">{{thisRestr.hours.mond}}</span></li>
+                <li>Tuesday <span class="pull-right">{{thisRestr.hours.tues}}</span></li>
+                <li>Wednesday <span class="pull-right">{{thisRestr.hours.wedn}}</span></li>
+                <li>Thursday <span class="pull-right">{{thisRestr.hours.thur}}</span></li>
+                <li>Friday <span class="pull-right">{{thisRestr.hours.frid}}</span></li>
+                <li>Saturday <span class="pull-right">{{thisRestr.hours.satr}}</span></li>
+                <li>Sunday <span class="pull-right">{{thisRestr.hours.sund}}</span></li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <hr> -->
+
+<section style="border-color: #F0F2F7; background-color: #F8F8F8; margin: 0 auto; border-right: 0px; border-left: 0px; border-bottom: 0px; border-style: solid; border-top: 1px;" width="100%">
+  <div class="container">
+    <div class="row">
+      <!--  Start single item -->
+      <div class="col-lrg-12">
+
+
+      <!--  Start new comment inputs -->
+        <div class="row" style="margin-bottom: 0px; margin-top: 26px;">
+          <div class="col-lg-1 offset-md-2" style="padding: 4px;">
+            <img src="/img/avatar/ava-4.png" style="float: right;" width="40px" alt="" />
+          </div>
+          <div class="col-lg-7">
+            <span style="color: #4BE1AB;">☆☆☆☆☆</span> <br>
+            <!-- <small><strong>Srikant Ramakrishnan</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 minutes ago</span><br> -->
+            <!-- <span style="font-size: 14px;"> -->
+            <textarea name="name" rows="8" cols="40" style="margin-top: 8px; font-size: 14px; width: 100%; background-color: #F0F2F7; color: #b0b0b0; padding: 8px; border: 1px solid #E3E8F0;" ng-model="myReview"></textarea>
+            <button class="pull-right" type="button" name="button" style="width: 20%; margin-top: 10px;" ng-click="writeReview(getRestID(page.pagename))">PUBLISH</button>
+          </div>
+        </div>
+      <!--  End new comment inputs -->
+
+      <!-- Start hr -->
+      <div class="row" style="margin-bottom: 4px;">
+        <div class="">
+          <div class="col-lg-8 offset-md-2" style="padding: 4px;">
+            <hr>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align: center; padding-top: 0px; padding-bottom: 14px;">
+        <span style="font-family: 'Montserrat', sans-serif; color: #222328; font-size: 16px; font-weight: 700;">{{thisRestr.reviews.length}} Reviews</span>
+      </p>
+
+      <!--  Start single reviews -->
+      <div class="row" style="margin-bottom: 20px;"  ng-repeat="review in thisRestr.reviews">
+        <div class="col-lg-1 offset-md-2" style="padding: 4px;">
+          <img src="/img/avatar/{{review.img}}" style="float: right;" width="40px" alt="" />
+        </div>
+        <div class="col-lg-7">
+          <span style="color: #4BE1AB;">★★★★☆ </span>({{review.rating}} stars) <br>
+          <small><strong>{{review.author}}</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{review.dateposted}}</span><br>
+          <span style="color: 34A526E; font-size: 14px;">
+          {{review.review}}</span>
+        </div>
+      </div>
+      <!--  End single reviews -->
+  </div>
+</section>

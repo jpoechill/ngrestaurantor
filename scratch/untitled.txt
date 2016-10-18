@@ -1,0 +1,46 @@
+<!--  Start single item -->
+<div class="col-lrg-12 restaurant-item">
+  <div class="col-md-9" style="height: 100%; padding: 30px">
+    <div class="" style="display: inline-block;">
+      <h5 style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong>Battambang
+    </strong></h5>
+    </div>
+    <div class="pull-right">
+      <span style="color: #4BE1AB;">★★★★☆</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">4.9</span> <span class="monty-font-reg">47 REVIEWS</span>
+    </div>
+    <br>
+    <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
+      <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-map-marker" aria-hidden="true"></i> 908 WASHINGTON ST, OAKLAND, CA 94607</li>
+    </ul>
+    <p style="margin-top: 12px;">
+      Treatment assessment expert foundation life-expectancy mobilize democracy social movement. Capacity building; beneficiaries country sustainable future necessities; asylum; human being education change-makers. Developing; equality global citizens, accelerate progress theory of social change aid involvement improving quality Medecins du Monde. Nutrition; Global South impact; vaccine small-scale farmers. <br>
+    </p>
+    <!-- Opened now.<br> -->
+    <br>
+    <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
+      <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-heart" aria-hidden="true"></i> 23</li>
+      <!-- <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-commenting" aria-hidden="true"></i> 32</li>
+      <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-clock-o" aria-hidden="true"></i> 10 minutes ago</li> -->
+    </ul>
+  </div>
+  <div id="restaurant-image" class="col-md-3 fill">
+    <img src="../img/food/salad_cut-2.png" alt="" />
+  </div>
+</div>
+<!--  End single item -->
+
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "main.htm"
+    })
+    .when("/red", {
+        templateUrl : "red.htm"
+    })
+    .when("/green", {
+        templateUrl : "green.htm"
+    })
+    .when("/blue", {
+        templateUrl : "blue.htm"
+    });
+});

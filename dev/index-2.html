@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myRestaurantApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script src="https://use.fontawesome.com/d499a08083.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+
+    <!-- Start Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <!-- End Angular -->
+
+    <title>Restaurantor</title>
+  </head>
+
+  <body ng-controller="PhoneListController">
+    <nav class="navbar navbar-fixed-top bg-inverse">
+      <div class="container">
+        <ul class="nav navbar-nav pull-xs-left">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="#"><strong><span style="font-size: 1.5em; font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;">Restaurantor</strong></a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav" border="1px" width="400px">
+          <li class="nav-item" width="200px" style="margin-left: -150px; margin-top: 4px;">
+            <input type="search" name="name" width="200px" style="font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;" value="&#xf002; SEARCH RESTAURANTS">
+            <input type="button" name="name" value="&#xf107; FILTER">
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div ng-view></div>
+
+    <!-- Restuarant Display List -->
+    <section>
+      <div class="container" style="padding-bottom: 10px;">
+        <div class="row">
+          <!--  Start single item -->
+          <div class="col-lrg-12">
+            <!-- Start header images -->
+            <div class="row">
+              <div class="col-md-3" style="padding: 6px;">
+                <img src="img/footsteps-1.png" width="100%" alt="" />
+              </div>
+              <div class="col-md-3" style="padding: 6px;">
+                <img src="img/food/salad_cut-2.png" width="100%" alt="" />
+              </div>
+              <div class="col-md-3" style="padding: 6px;">
+                <img src="img/food/salad_cut-2.png" width="100%" alt="" />
+              </div>
+              <div class="col-md-3" style="padding: 6px;">
+                <img src="img/food/salad_cut-2.png" width="100%" alt="" />
+              </div>
+            </div>
+            <!-- End header images -->
+            <div class="row">
+              <div class="col-md-9" style="margin-bottom: 18px;">
+                <p>
+                  <h5 style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong>{{phones[0].name}}</strong></h5>
+                </p>
+                <p>
+                  <span style="color: #4BE1AB;">★★★★☆</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{phones[0].rating}}</span> <span class="monty-font-reg">{{phones[0].reviews.length}} REVIEWS</span>
+                </p>
+                <p>
+                  <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
+                    <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-map-marker" aria-hidden="true"></i> {{phones[0].address}}</li>
+                  </ul>
+                </p>
+                <p>
+                  {{phones[0].blurb}}
+                </p>
+                <span class="monty-font-reg"><i class="fa fa-heart" aria-hidden="true" ng-click="addLikes()"></i> {{phones[0].likes}}</li></span>
+              </div>
+              <div class="col-md-3">
+                <p>
+                  <h6 style="color: grey; font-size: small;">Hours</h6>
+                  <ul style="list-style: none; padding:0; font-size: 13px; color: #333;">
+                    <li>Monday <span class="pull-right">{{phones[0].hours.mond}}</span></li>
+                    <li>Tuesday <span class="pull-right">{{phones[0].hours.tues}}</span></li>
+                    <li>Wednesday <span class="pull-right">{{phones[0].hours.wedn}}</span></li>
+                    <li>Thursday <span class="pull-right">{{phones[0].hours.thur}}</span></li>
+                    <li>Friday <span class="pull-right">{{phones[0].hours.frid}}</span></li>
+                    <li>Saturday <span class="pull-right">{{phones[0].hours.satr}}</span></li>
+                    <li>Sunday <span class="pull-right">{{phones[0].hours.sund}}</span></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <hr> -->
+
+    <section style="border-color: #F0F2F7; background-color: #F8F8F8; margin: 0 auto; border-right: 0px; border-left: 0px; border-bottom: 0px; border-style: solid; border-top: 1px;" width="100%">
+      <div class="container">
+        <div class="row">
+          <!--  Start single item -->
+          <div class="col-lrg-12">
+
+
+          <!--  Start new comment inputs -->
+            <div class="row" style="margin-bottom: 0px; margin-top: 26px;">
+              <div class="col-lg-1 offset-md-2" style="padding: 4px;">
+                <img src="/img/avatar/ava-4.png" style="float: right;" width="40px" alt="" />
+              </div>
+              <div class="col-lg-7">
+                <span style="color: #4BE1AB;">☆☆☆☆☆</span> <br>
+                <!-- <small><strong>Srikant Ramakrishnan</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 minutes ago</span><br> -->
+                <!-- <span style="font-size: 14px;"> -->
+                <textarea name="name" rows="8" cols="40" style="margin-top: 8px; font-size: 14px; width: 100%; background-color: #F0F2F7; color: #b0b0b0; padding: 8px; border: 1px solid #E3E8F0;" ng-model="myReview"></textarea>
+                <button class="pull-right" type="button" name="button" style="width: 20%; margin-top: 10px;" ng-click="clickFunction()">PUBLISH</button>
+              </div>
+            </div>
+          <!--  End new comment inputs -->
+
+          <!-- Start hr -->
+          <div class="row" style="margin-bottom: 4px;">
+            <div class="">
+              <div class="col-lg-8 offset-md-2" style="padding: 4px;">
+                <hr>
+              </div>
+            </div>
+          </div>
+
+          <p style="text-align: center; padding-top: 0px; padding-bottom: 14px;">
+            <span style="font-family: 'Montserrat', sans-serif; color: #222328; font-size: 16px; font-weight: 700;">{{phones[0].reviews.length}} Reviews</span>
+          </p>
+
+          <!--  Start single reviews -->
+          <div class="row" style="margin-bottom: 20px;"  ng-repeat="review in phones[0].reviews">
+            <div class="col-lg-1 offset-md-2" style="padding: 4px;">
+              <img src="/img/avatar/ava-1.png" style="float: right;" width="40px" alt="" />
+            </div>
+            <div class="col-lg-7">
+              <span style="color: #4BE1AB;">★★★★☆ </span>({{review.rating}} stars) <br>
+              <small><strong>{{review.author}}</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{review.dateposted}}</span><br>
+              <span style="color: 34A526E; font-size: 14px;">
+              {{review.review}}</span>
+            </div>
+          </div>
+          <!--  End single reviews -->
+      </div>
+    </section>
+
+    <!--build:css css/styles.min.css-->
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/styles.min.css" rel="stylesheet">
+    <!--endbuild-->
+
+    <!--build:js js/main.min.js -->
+
+    <!-- Restaurant App -->
+    <script src="js/app.js"></script>
+    <!-- End Restaurant App-->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/lib/jquery-3.0.0.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/lib/jquery-3.1.1.min.js"><\/script>')</script>
+    <script src="js/lib/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="../css/bootstrap.min.js"></script>
+
+  </body>
+</html>

@@ -1,291 +1,500 @@
-// JS doc for Transportation App (BART)
-// API Key: QR4P-5A9K-9K3T-DWE9
-// Test link: http://api.bart.gov/api/bsa.aspx?cmd=count&key=QR4P-5A9K-9K3T-DWE9
-// https://api.bart.gov/api/sched.aspx?cmd=depart&orig=woak&dest=mont&date=now&key=QR4P-5A9K-9K3T-DWE9&b=4&a=4&l=1'
-var API_Key = "QR4P-5A9K-9K3T-DWE9";
+// Start Restaurant app
+// Using Angular.js
 
-$(document).ready(function(){
-    // fetchBartInfo();
-    initCookies();
+// Angular setup
+// Define 'phonecatApp' module
+var app = angular.module('myRestaurantApp', ['ngRoute']);
 
-    fetchBartTrains();
-
-    fetchDefaults();
-    // loadTrainsInfoFromDB();
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "templates/main.html"
+    })
+    .when("/:pagename", {
+        templateUrl : "templates/red.html",
+    });
 });
 
-function fetchDefaults() {
-    var origDropdown = $('#dropDownTrainInfo');
-    var destDropdown = $('#dropDownTrainInfoSecond');
 
-    origDropdown.text(stationsJSON['woak']);
-    origDropdown.val(stationsJSON['woak']);
-    destDropdown.text(stationsJSON['mont']);
-    destDropdown.val(stationsJSON['mont']);
+// Define 'phonecatApp' controller
+app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneListController($scope, $routeParams) {
+  $scope.page = $routeParams;
 
-    // Defaults
-    loadTrainsInfoFromDB('woakmont');
-    fetchBartDepartures("woak", "mont");
-};
+  $scope.myReview = "Write a review...";
 
-// Basic API Info
-function fetchBartInfo () {
-    $.ajax({
-        cache: true,
-        url: 'https://api.bart.gov/api/bsa.aspx?cmd=count' + '&key=' + API_Key,
-        error: function(data) {
-            console.log("There was an error retreiving the JSON.");
-        },
-        success: function(data) {
-            var xmlDoc = data;
+  $scope.addLikes = function (restID) {
+    var thisRest = this.phones[restID];
+    if (thisRest.liked == false) {
+        thisRest.likes++;
+        thisRest.liked = true;
+    }
+  };
 
-            var date = xmlDoc.getElementsByTagName("date")[0].childNodes[0].nodeValue;
-            var time = xmlDoc.getElementsByTagName("time")[0].childNodes[0].nodeValue;
-            var traincount = xmlDoc.getElementsByTagName("traincount")[0].childNodes[0].nodeValue;
+  $scope.myLikedStyle = function (restID) {
+    
+  };
 
-            document.getElementById("bartDate").innerHTML = date;
-            document.getElementById("bartTime").innerHTML = time;
-            document.getElementById("bartTrainCount").innerHTML = traincount;
-        },
-    });
-}
+  $scope.thisRating = "";
 
-// Populate dropdowns
-function fetchBartTrains () {
-    $.ajax({
-        cache: true,
-        url: 'https://api.bart.gov/api/stn.aspx?cmd=stns' + '&key=' + API_Key,
-        error: function(data) {
-            console.log("There was an error retreiving the JSON. Using back up.");
+  $scope.currentUser = "Jamaica Les Denardo"
 
-            $(".dropdown-menu").empty();
+  $scope.writeReview = function  (restID) {
+    var thisRest = this.phones[restID];
 
-            for ( stationAbbrev in stationsJSON ) {
-                $('#dropdownListTrainInfo').append("<li><a id=\"" + stationAbbrev + "\" class=\"dropdown-item\" href=\"#\">" + stationsJSON[stationAbbrev] + "</a></li>");
-                $('#dropdownListTrainInfoSecond').append("<li><a id=\"" + stationAbbrev + "\" class=\"dropdown-item\" href=\"#\">" + stationsJSON[stationAbbrev] + "</a></li>");
-            }
-        },
-        success: function(data) {
-            var xmlDoc = data;
-            var x = xmlDoc.getElementsByTagName('station');
-            var xLen = x.length;
-
-            $(".dropdown-menu").empty();
-
-            for (var i = 0; i < xLen; i++) {
-                var thisTrainHere = xmlDoc.getElementsByTagName("name")[i].childNodes[0].nodeValue;
-                var thisTrainKey;
-
-                for (stationAbbrev in stationsJSON) {
-                    if (stationsJSON[stationAbbrev] == thisTrainHere) {
-                        thisTrainKey = stationAbbrev;
-                    };
-                }
-
-                $('#dropdownListTrainInfo').append("<li><a id=\"" + thisTrainKey + "\" class=\"dropdown-item\" href=\"#\">" + thisTrainHere + "</a></li>");
-                $('#dropdownListTrainInfoSecond').append("<li><a id=\"" + thisTrainKey + "\" class=\"dropdown-item\" href=\"#\">" + thisTrainHere + "</a></li>");
-            }
-        },
-    });
-}
-
-function fetchBartDepartures (orig, dest) {
-    $.ajax({
-        cache: true,
-        url: 'https://api.bart.gov/api/sched.aspx?cmd=depart&orig=' + orig + '&dest=' + dest + '&date=now&key=' + API_Key + '&b=4&a=4&l=1',
-        error: function(data) {
-            console.log("There was an error retreiving the JSON.");
-        },
-        success: function(data) {
-            var xmlDoc = data;
-            var x = xmlDoc.getElementsByTagName('trip');
-
-            var thisTrainArray = [];
-            var thisOrig = stationsJSON[orig];
-            var thisDest = stationsJSON[dest];
-
-            thisRoute = orig + dest;
-
-            // Clear data-table
-            $('#thisBartDataTable').empty();
-
-            // Capture fare and duration
-            var thisTrainDBFare = x[0].getAttribute("fare");;
-            var thisTrainDBDuration = calculateTravelDuration(x[0].getAttribute("origTimeMin").split(" "), x[0].getAttribute("destTimeMin").split(" "));;
-
-            for (var i = 0; i < x.length; i++ ) {
-                // Set up vars
-                var thisOrigTime = x[i].getAttribute("origTimeMin");
-                var thisDestTime = x[i].getAttribute("destTimeMin");
-                var thisTrainNum = i + 1;
-
-                // Update DOM
-                var thisHTMLString = "<tr><th scope=\"row\">" + thisTrainNum + "</th><td>" + thisOrigTime + "</td><td>" + thisDestTime + "</td>";
-                $('#thisBartDataTable').append(thisHTMLString);
-
-                // Update major array
-                thisTrainArray.push({id: thisTrainNum, departs: thisOrigTime, arrives: thisDestTime});
-            }
-
-            // Update DOM
-            document.getElementById('fare').innerHTML = "$ " + thisTrainDBFare;
-            document.getElementById('duration').innerHTML = thisTrainDBDuration;
-
-            // Update DB
-            addNewTrainInfo(thisRoute, thisOrig, thisDest, thisTrainDBFare, thisTrainDBDuration, thisTrainArray);
-
-            //Update Cookies
-            document.cookie = "lastFare=" + thisTrainDBFare;
-            document.cookie = "lastDurr=" + thisTrainDBDuration;
-            document.cookie = "theseTrains=" + JSON.stringify(thisTrainArray);
+    if (thisRest.reviewed == false) {
+      thisRest.reviews.unshift(
+        {
+          author: $scope.currentUser,
+          rating: 4,
+          img: "ava-3.png",
+          dateposted: "2 minutes ago",
+          review: $scope.myReview
         }
-    });
-}
+      );
 
-function calculateTravelDuration (firstTime, secondTime) {
-    var thisTrainOrigTimeArr = firstTime;
-    var thisTrainDestTimeArr = secondTime;
-
-    var firstTime = thisTrainOrigTimeArr[0].split(":");
-    var firstHH = firstTime[0];
-    var firstMM = firstTime[1];
-    var firstAMPM = thisTrainOrigTimeArr[1];
-
-    var secondTime = thisTrainDestTimeArr[0].split(":");
-    var secondHH = secondTime[0];
-    var secondMM = secondTime[1];
-    var secondAMPM = thisTrainDestTimeArr[1];
-
-    thisTrainDurrTime = secondHH - firstHH;
-
-    if (secondMM - firstMM <= 0) {
-        thisTrainDurrTime = secondMM - firstMM + 60;
-        thisTrainDurrTime += " mins";
-    } else {
-        thisTrainDurrTime = secondMM - firstMM;
-        thisTrainDurrTime += " mins";
+      thisRest.reviewed = true;
     }
 
-    return thisTrainDurrTime;
-}
+  };
 
-// Tranlate station names per Bart API
-function updateBartDepartures (val1, val2) {
-    // Object converter
-    var thisStationDepartureAbbrev;
-    var thisStationArrivalAbbrev;
+  $scope.getRestID = function (name) {
+    var thisID;
 
-    for ( stationAbbrev in stationsJSON ) {
-        if (stationsJSON[stationAbbrev] == val1) {
-            thisStationDepartureAbbrev = stationAbbrev;
-        }
-    }
-
-    for ( stationAbbrev in stationsJSON ) {
-        if (stationsJSON[stationAbbrev] == val2) {
-            thisStationArrivalAbbrev = stationAbbrev;
-        }
-    }
-
-    fetchBartDepartures(thisStationDepartureAbbrev, thisStationArrivalAbbrev);
-}
-
-// Conversion data key
-var stationsJSON = {
-    "12th": "12th St. Oakland City Center",
-    "16th": "16th St. Mission",
-    "19th": "19th St. Oakland",
-    "24th": "24th St. Mission",
-    ashb: "Ashby",
-    balb: "Balboa Park",
-    bayf: "Bay Fair",
-    cast: "Castro Valley",
-    civc: "Civic Center/UN Plaza",
-    cols: "Coliseum",
-    colm: "Colma",
-    conc: "Concord",
-    daly: "Daly City",
-    dbrk: "Downtown Berkeley",
-    dubl: "Dublin/Pleasanton",
-    deln: "El Cerrito del Norte",
-    plza: "El Cerrito Plaza",
-    embr: "Embarcadero",
-    frmt: "Fremont",
-    ftvl: "Fruitvale",
-    glen: "Glen Park",
-    hayw: "Hayward",
-    lafy: "Lafayette",
-    lake: "Lake Merritt",
-    mcar: "MacArthur",
-    mlbr: "Millbrae",
-    mont: "Montgomery St.",
-    nbrk: "North Berkeley",
-    ncon: "North Concord/Martinez",
-    oakl: "Oakland Int'l Airport",
-    orin: "Orinda",
-    pitt: "Pittsburg/Bay Point",
-    phil: "Pleasant Hill/Contra Costa Centre",
-    powl: "Powell St.",
-    rich: "Richmond",
-    rock: "Rockridge",
-    sbrn: "San Bruno",
-    sfia: "San Francisco Int'l Airport",
-    sanl: "San Leandro",
-    shay: "South Hayward",
-    ssan: "South San Francisco",
-    ucty: "Union City",
-    wcrk: "Walnut Creek",
-    wdub: "West Dublin/Pleasanton",
-    woak: "West Oakland",
-};
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-
-  for(var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0)==' ') {
-          c = c.substring(1);
+    for (var i = 0; i < $scope.phones.length; i++) {
+      if (name == $scope.phones[i].link) {
+        thisID = i;
       }
-      if (c.indexOf(name) == 0) {
-          return c.substring(name.length,c.length);
-      }
-  }
-  return "";
-};
+    };
 
-function initCookies() {
-  var thisOrig = getCookie("lastOrigCookie");
-  var trainsOBJ = getCookie("theseTrains");
-  var thisDest = getCookie("lastDestCookie");
-
-  if (thisOrig == "" || thisDest == "" || trainsOBJ == "") {
-    return;
+    return thisID;
   }
 
-  // Populate first dropdown
-  $('#dropDownTrainInfo').text(thisOrig);
-  $('#dropDownTrainInfo').val(thisOrig);
-
-  // Populate second dropdown
-  $('#dropDownTrainInfoSecond').text(thisDest);
-  $('#dropDownTrainInfoSecond').val(thisDest);
-
-  // Fare and duration
-  var thisFare = getCookie("lastFare");
-  document.getElementById('fare').innerHTML = "$ " + thisFare;
-  var thisDurr = getCookie("lastDurr");
-  document.getElementById('duration').innerHTML = thisDurr;
-
-  // Train times
-  $('#thisBartDataTable').empty();
-  trainsOBJ = JSON.parse(trainsOBJ);
-
-  for (var i = 0; i < trainsOBJ.length; i++) {
-      var thisTrainNum = i + 1;
-      var thisHTMLString = "<tr><th scope=\"row\">" + thisTrainNum + "</th><td>" + trainsOBJ[i].departs + "</td><td>" + trainsOBJ[i].arrives + "</td>";
-      $('#thisBartDataTable').append(thisHTMLString);
-  }
-
-};
+  $scope.phones = [
+    {
+      name: "Battambang",
+      rating: 4.2,
+      address: "850 Broadway, Oakland, CA 94607",
+      blurb: "When Battambang opened in Oakland in 1993, it was one of the very few Cambodian restaurants in the Bay Area. Now, more than 10 years later, it still is -- and it's also a pleasant place to get a sampling of the flavors of the Southeast Asian country. Battambang occupies a well-lit row of remodeled storefronts on the edge of Oakland's Chinatown. Walls are painted in warm pumpkin hues, lit by wall sconces and decorated with precisely spaced small framed paintings and an assortment of Cambodian artifacts... ",
+      photo: "",
+      liked: false,
+      likes: 10,
+      link: "battambang",
+      reviewed: false,
+      hours: {
+        mond: "8pm - 8pm",
+        tues: "8pm - 8pm",
+        wedn: "8pm - 8pm",
+        thur: "8pm - 8pm",
+        frid: "8pm - 8pm",
+        satr: "8pm - 10pm",
+        sund: "8pm - 10pm",
+      },
+      reviews: [
+        {
+          author: "Srikant Ramakrishnan",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "1 day ago",
+          review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+        },
+        {
+          author: "David",
+          rating: 5,
+          img: "ava-2.png",
+          dateposted: "1 day ago",
+          review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+        },
+        {
+          author: "Miles",
+          rating: 3,
+          img: "ava-3.png",
+          dateposted: "4 day ago",
+          review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+        },
+        {
+          author: "Nelson Wong",
+          rating: 4,
+          img: "ava-4.png",
+          dateposted: "1 week ago",
+          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+        },
+        {
+          author: "Paul Parker",
+          rating: 2,
+          img: "ava-5.png",
+          dateposted: "1 month ago",
+          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+        },
+        {
+          author: "Lucy Wu",
+          rating: 1,
+          img: "ava-6.png",
+          dateposted: "3 months ago",
+          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+        },
+        {
+          author: "Naomi Lewis",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "4 months ago",
+          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+        }
+      ],
+    },
+    {
+      name: "Cosecha",
+      rating: 4.3,
+      address: "907 Washington St, Oakland, CA 94607",
+      blurb: "Those who find their way to our location in Old Oakland experience the communion of California and Mexico and will find comfort in our home-style offerings. We prepare everything from scratch every day, including handmade tortillas, pastries, and complex traditional entrees, as well as seasonal salads and soups. We strive to provide high quality, affordable meals that can be eaten inside or on the go. We serve California wines, beers, and ingredients that use an abundance of high quality, local products.",
+      photo: "",
+      liked: false,
+      link: "cosecha",
+      reviewed: false,
+      likes: 10,
+      hours: {
+        mond: "8pm - 8pm",
+        tues: "8pm - 8pm",
+        wedn: "8pm - 8pm",
+        thur: "8pm - 8pm",
+        frid: "8pm - 8pm",
+        satr: "8pm - 10pm",
+        sund: "8pm - 10pm",
+      },
+      reviews: [
+        {
+          author: "Srikant Ramakrishnan",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "1 day ago",
+          review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+        },
+        {
+          author: "David",
+          rating: 5,
+          img: "ava-2.png",
+          dateposted: "1 day ago",
+          review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+        },
+        {
+          author: "Miles",
+          rating: 3,
+          img: "ava-3.png",
+          dateposted: "4 day ago",
+          review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+        },
+        {
+          author: "Nelson Wong",
+          rating: 4,
+          img: "ava-4.png",
+          dateposted: "1 week ago",
+          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+        },
+        {
+          author: "Paul Parker",
+          rating: 2,
+          img: "ava-5.png",
+          dateposted: "1 month ago",
+          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+        },
+        {
+          author: "Lucy Wu",
+          rating: 1,
+          img: "ava-6.png",
+          dateposted: "3 months ago",
+          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+        },
+        {
+          author: "Naomi Lewis",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "4 months ago",
+          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+        }
+      ],
+    },
+    {
+      name: "Le Cheval",
+      rating: 4.4,
+      address: "1007 Clay St, Oakland, CA 94607",
+      blurb: "Since 1985, Le Cheval has been at the forefront of introducing the flavors of Asia to Oakland. Today, we proudly serve our family recipes in Old Oakland and in Walnut Creek. Our style of food brings together the flavors of French, Chinese and Southeast Asian cooking. Each of our recipes includes a balanced combination of fresh ingredients and exotic spices to bring out the best flavor in every dish. We strongly believe that the food you eat is just as important as who you eat it with and we strive to create an environment that makes each gathering special. Enjoy! ",
+      photo: "",
+      link: "lecheval",
+      reviewed: false,
+      liked: false,
+      likes: 10,
+      hours: {
+        mond: "8pm - 8pm",
+        tues: "8pm - 8pm",
+        wedn: "8pm - 8pm",
+        thur: "8pm - 8pm",
+        frid: "8pm - 8pm",
+        satr: "8pm - 10pm",
+        sund: "8pm - 10pm",
+      },
+      reviews: [
+        {
+          author: "Srikant Ramakrishnan",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "1 day ago",
+          review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+        },
+        {
+          author: "David",
+          rating: 5,
+          img: "ava-2.png",
+          dateposted: "1 day ago",
+          review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+        },
+        {
+          author: "Miles",
+          rating: 3,
+          img: "ava-3.png",
+          dateposted: "4 day ago",
+          review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+        },
+        {
+          author: "Nelson Wong",
+          rating: 4,
+          img: "ava-4.png",
+          dateposted: "1 week ago",
+          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+        },
+        {
+          author: "Paul Parker",
+          rating: 2,
+          img: "ava-5.png",
+          dateposted: "1 month ago",
+          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+        },
+        {
+          author: "Lucy Wu",
+          rating: 1,
+          img: "ava-6.png",
+          dateposted: "3 months ago",
+          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+        },
+        {
+          author: "Naomi Lewis",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "4 months ago",
+          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+        }
+      ],
+    },
+    {
+      name: "Tamarindo",
+      rating: 4.3,
+      address: "468 8th St, Oakland, CA 94607",
+      blurb: "Gloria Dominguez, a native from Mixtlan in the state of Jalisco, opened Tamarindo Antojeria Mexicana in 2005 with her son Alfonso Dominguez. Gloria happily introduces an old concept into a new experience  of eating Mexican food:  small cravings (Antojitos)  “I had a simple goal - no fusion, just traditional Mexican cuisine that one can find thoughout Mexico”. Another important goal was bringing the social aspect back into dining. She was surprised to find the Mexican dining experience differed here in the US, with individual plates rather than sharing small bites as she would in Mexico. ",
+      photo: "",
+      link: "tamarindo",
+      reviewed: false,
+      liked: false,
+      likes: 10,
+      hours: {
+        mond: "8pm - 8pm",
+        tues: "8pm - 8pm",
+        wedn: "8pm - 8pm",
+        thur: "8pm - 8pm",
+        frid: "8pm - 8pm",
+        satr: "8pm - 10pm",
+        sund: "8pm - 10pm",
+      },
+      reviews: [
+        {
+          author: "Srikant Ramakrishnan",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "1 day ago",
+          review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+        },
+        {
+          author: "David",
+          rating: 5,
+          img: "ava-2.png",
+          dateposted: "1 day ago",
+          review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+        },
+        {
+          author: "Miles",
+          rating: 3,
+          img: "ava-3.png",
+          dateposted: "4 day ago",
+          review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+        },
+        {
+          author: "Nelson Wong",
+          rating: 4,
+          img: "ava-4.png",
+          dateposted: "1 week ago",
+          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+        },
+        {
+          author: "Paul Parker",
+          rating: 2,
+          img: "ava-5.png",
+          dateposted: "1 month ago",
+          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+        },
+        {
+          author: "Lucy Wu",
+          rating: 1,
+          img: "ava-6.png",
+          dateposted: "3 months ago",
+          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+        },
+        {
+          author: "Naomi Lewis",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "4 months ago",
+          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+        }
+      ],
+    },
+    {
+      name: "Cafe 817",
+      rating: 3.3,
+      address: "817 Washington St, Oakland, CA 94607",
+      blurb: "Here we are. At a place that was created to remind us of the Old World in the middle of a city that has as much diversity as any European metropolis. We are a café and restaurant with a neighborhood feel in Oakland’s vibrant downtown business district. Here you will enjoy a cup of legendary coffee and food as comforting as that you\’d expect from your grandmother’s kitchen. Caffe 817 is a place where we come to gather, visit, discuss, and laugh. And eat! We\’re open for breakfast and lunch throughout the week, and brunch on the weekends. ",
+      photo: "",
+      link: "cafe817",
+      reviewed: false,
+      liked: false,
+      likes: 10,
+      hours: {
+        mond: "8pm - 8pm",
+        tues: "8pm - 8pm",
+        wedn: "8pm - 8pm",
+        thur: "8pm - 8pm",
+        frid: "8pm - 8pm",
+        satr: "8pm - 10pm",
+        sund: "8pm - 10pm",
+      },
+      reviews: [
+        {
+          author: "Srikant Ramakrishnan",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "1 day ago",
+          review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+        },
+        {
+          author: "David",
+          rating: 5,
+          img: "ava-2.png",
+          dateposted: "1 day ago",
+          review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+        },
+        {
+          author: "Miles",
+          rating: 3,
+          img: "ava-3.png",
+          dateposted: "4 day ago",
+          review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+        },
+        {
+          author: "Nelson Wong",
+          rating: 4,
+          img: "ava-4.png",
+          dateposted: "1 week ago",
+          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+        },
+        {
+          author: "Paul Parker",
+          rating: 2,
+          img: "ava-5.png",
+          dateposted: "1 month ago",
+          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+        },
+        {
+          author: "Lucy Wu",
+          rating: 1,
+          img: "ava-6.png",
+          dateposted: "3 months ago",
+          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+        },
+        {
+          author: "Naomi Lewis",
+          rating: 4,
+          img: "ava-1.png",
+          dateposted: "4 months ago",
+          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+        }
+      ],
+    },
+    {
+        name: "Authentic Bagel Company",
+        rating: 5,
+        address: "463 2nd St., Oakland, CA 94607",
+        blurb: "From Italian restaurants in Providence, they moved to managing and cooking in restaurants in Berkeley and Portland, then to Monaghan’s on the Hill in the Oakland Hills. For a Mother’s Day brunch menu one year, they decided to offer housemade bagel sandwiches, which were a hit. For the Sunday-afternoon football crowd, more bagel sandwiches, until customers started asking where they got their bagels, and could they buy a dozen to take home? ",
+        photo: "",
+        link: "authenticbagelcompany",
+        reviewed: false,
+        liked: false,
+        likes: 10,
+        hours: {
+          mond: "8pm - 8pm",
+          tues: "8pm - 8pm",
+          wedn: "8pm - 8pm",
+          thur: "8pm - 8pm",
+          frid: "8pm - 8pm",
+          satr: "8pm - 10pm",
+          sund: "8pm - 10pm",
+        },
+        reviews: [
+          {
+            author: "Srikant Ramakrishnan",
+            rating: 4,
+            img: "ava-1.png",
+            dateposted: "1 day ago",
+            review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
+          },
+          {
+            author: "David",
+            rating: 5,
+            img: "ava-2.png",
+            dateposted: "1 day ago",
+            review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
+          },
+          {
+            author: "Miles",
+            rating: 3,
+            img: "ava-3.png",
+            dateposted: "4 day ago",
+            review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
+          },
+          {
+            author: "Nelson Wong",
+            rating: 4,
+            img: "ava-4.png",
+            dateposted: "1 week ago",
+            review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
+          },
+          {
+            author: "Paul Parker",
+            rating: 2,
+            img: "ava-5.png",
+            dateposted: "1 month ago",
+            review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
+          },
+          {
+            author: "Lucy Wu",
+            rating: 1,
+            img: "ava-6.png",
+            dateposted: "3 months ago",
+            review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
+          },
+          {
+            author: "Naomi Lewis",
+            rating: 4,
+            img: "ava-1.png",
+            dateposted: "4 months ago",
+            review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
+          }
+       ],
+    }
+  ];
+}]);

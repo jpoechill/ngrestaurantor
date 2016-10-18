@@ -1,0 +1,34 @@
+<section>
+  <div class="container">
+    <div class="row" id="main-container">
+
+      <!--  Start single item -->
+      <div class="col-lrg-12 restaurant-item" ng-repeat="phone in phones">
+        <div class="col-md-9" style="height: 100%; padding: 30px">
+          <div class="" style="display: inline-block;">
+            <h5 style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong><a href="#/{{phone.link}}">{{phone.name}}</a></strong></h5>
+          </div>
+          <div class="pull-right">
+            <span style="color: #4BE1AB;">★★★★☆</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{phone.rating}}</span> <span class="monty-font-reg">{{phone.reviews.length}} REVIEWS</span>
+          </div>
+          <br>
+          <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
+            <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-map-marker" aria-hidden="true"></i> {{phone.address}}</li>
+          </ul>
+          <p style="margin-top: 12px;">
+            {{phone.blurb}}<br>
+          </p>
+          <br>
+          <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
+            <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-heart" aria-hidden="true" ng-class="{liked: phone.liked == true}" ng-click="addLikes(getRestID(phone.link))"></i> {{phone.likes}}</li>
+          </ul>
+        </div>
+        <div id="restaurant-image" class="col-md-3 fill">
+          <img src="../img/food/salad_cut-2.png" alt="" />
+        </div>
+      </div>
+      <!--  End single item -->
+
+    </div>
+  </div>
+</section>
