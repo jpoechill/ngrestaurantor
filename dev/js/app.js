@@ -5,63 +5,117 @@
 // Define 'phonecatApp' module
 var app = angular.module('myRestaurantApp', ['ngRoute']);
 
-app.config(function($routeProvider) {
-    $routeProvider
-    .when("/", {
-        templateUrl : "templates/main.html"
-    })
-    .when("/:pagename", {
-        templateUrl : "templates/red.html",
-    });
-});
+// Main page controller
+// Search and filter controller
+// Item page controller
+// Item page new post controller
+// PhoneListController
 
-
-// Define 'phonecatApp' controller
-app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneListController($scope, $routeParams) {
+// Define 'RestrController' controller
+app.controller('RestrController', ['$scope', '$routeParams', function RestrController($scope, $routeParams) {
   $scope.page = $routeParams;
+
+  $scope.pagelink = function () {
+    // console.log("Hello, world@!");
+    //
+    // console.log("You are signed in.");
+    //
+    // $scope.isSignedIn = false;
+
+    if ($scope.isSignedIn == false) {
+      console.log("You are signed in.");
+      $scope.isSignedIn = true;
+    }
+  };
+
+  $scope.isSignedIn = false;
 
   $scope.myReview = "Write a review...";
 
   $scope.addLikes = function (restID) {
-    var thisRest = this.phones[restID];
+    var thisRest = this.restaurants[restID];
     if (thisRest.liked == false) {
         thisRest.likes++;
         thisRest.liked = true;
     }
   };
 
-  $scope.myLikedStyle = function (restID) {
-    
-  };
-
   $scope.thisRating = "";
 
   $scope.currentUser = "Jamaica Les Denardo"
 
+  $scope.currentRating = 0;
+
+  $scope.showCurrentRating = function (numRating) {
+    var thisManyStars = $scope.showStars(numRating);
+    return thisManyStars;
+  }
+
+  $scope.clickedStars = function () {
+    // var currentRating = $scope.currentRating;
+    // alert("You clicked me");
+    if ($scope.currentRating < 5) {
+      $scope.currentRating = $scope.currentRating + 1;
+    } else {
+      $scope.currentRating = 0;
+    }
+  };
+
+  $scope.showStars = function (num) {
+    var stars = "";
+    var num = Math.round(num);
+
+    for (var i = 0; i < num; i++) {
+      stars += "★";
+    };
+
+    for (var i = 0; i < (5-num); i++) {
+      stars += "☆";
+    };
+
+    return stars;
+  };
+
+  $scope.updateAvgRatings = function () {
+    for (var i = 0; i < $scope.restaurants.length; i++) {
+      var thisRestRating;
+      var currentSum = 0;
+      for (var t = 0; t < $scope.restaurants[i].reviews.length; t++) {
+        currentSum = currentSum + $scope.restaurants[i].reviews[t].rating;
+      }
+
+      thisRestRating = currentSum / $scope.restaurants[i].reviews.length;
+      $scope.restaurants[i].rating = parseFloat(thisRestRating).toFixed(1);
+    }
+  }
+
   $scope.writeReview = function  (restID) {
-    var thisRest = this.phones[restID];
+    var thisRest = this.restaurants[restID];
 
     if (thisRest.reviewed == false) {
       thisRest.reviews.unshift(
         {
           author: $scope.currentUser,
-          rating: 4,
+          rating: $scope.currentRating,
           img: "ava-3.png",
           dateposted: "2 minutes ago",
           review: $scope.myReview
         }
       );
 
+      $scope.currentRating = 0;
       thisRest.reviewed = true;
+      $scope.updateAvgRatings();
     }
 
+    alert("Thank you for the review!");
   };
 
   $scope.getRestID = function (name) {
     var thisID;
 
-    for (var i = 0; i < $scope.phones.length; i++) {
-      if (name == $scope.phones[i].link) {
+    for (var i = 0; i < $scope.restaurants.length; i++) {
+      if (name == $scope.restaurants[i].link) {
         thisID = i;
       }
     };
@@ -69,7 +123,7 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
     return thisID;
   }
 
-  $scope.phones = [
+  $scope.restaurants = [
     {
       name: "Battambang",
       rating: 4.2,
@@ -92,7 +146,7 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
       reviews: [
         {
           author: "Srikant Ramakrishnan",
-          rating: 4,
+          rating: 5,
           img: "ava-1.png",
           dateposted: "1 day ago",
           review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
@@ -120,24 +174,17 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         },
         {
           author: "Paul Parker",
-          rating: 2,
+          rating: 5,
           img: "ava-5.png",
           dateposted: "1 month ago",
           review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
         },
         {
           author: "Lucy Wu",
-          rating: 1,
+          rating: 4,
           img: "ava-6.png",
           dateposted: "3 months ago",
           review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
-        },
-        {
-          author: "Naomi Lewis",
-          rating: 4,
-          img: "ava-1.png",
-          dateposted: "4 months ago",
-          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
         }
       ],
     },
@@ -163,7 +210,7 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
       reviews: [
         {
           author: "Srikant Ramakrishnan",
-          rating: 4,
+          rating: 5,
           img: "ava-1.png",
           dateposted: "1 day ago",
           review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
@@ -177,14 +224,14 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         },
         {
           author: "Miles",
-          rating: 3,
+          rating: 5,
           img: "ava-3.png",
           dateposted: "4 day ago",
           review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
         },
         {
           author: "Nelson Wong",
-          rating: 4,
+          rating: 5,
           img: "ava-4.png",
           dateposted: "1 week ago",
           review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
@@ -198,7 +245,7 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         },
         {
           author: "Lucy Wu",
-          rating: 1,
+          rating: 5,
           img: "ava-6.png",
           dateposted: "3 months ago",
           review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
@@ -248,7 +295,7 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         },
         {
           author: "Miles",
-          rating: 3,
+          rating: 4,
           img: "ava-3.png",
           dateposted: "4 day ago",
           review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
@@ -269,17 +316,10 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         },
         {
           author: "Lucy Wu",
-          rating: 1,
+          rating: 4,
           img: "ava-6.png",
           dateposted: "3 months ago",
           review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
-        },
-        {
-          author: "Naomi Lewis",
-          rating: 4,
-          img: "ava-1.png",
-          dateposted: "4 months ago",
-          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
         }
       ],
     },
@@ -305,52 +345,24 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
       reviews: [
         {
           author: "Srikant Ramakrishnan",
-          rating: 4,
+          rating: 5,
           img: "ava-1.png",
           dateposted: "1 day ago",
           review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
         },
         {
           author: "David",
-          rating: 5,
+          rating: 4,
           img: "ava-2.png",
           dateposted: "1 day ago",
           review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
         },
         {
           author: "Miles",
-          rating: 3,
+          rating: 5,
           img: "ava-3.png",
           dateposted: "4 day ago",
           review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
-        },
-        {
-          author: "Nelson Wong",
-          rating: 4,
-          img: "ava-4.png",
-          dateposted: "1 week ago",
-          review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
-        },
-        {
-          author: "Paul Parker",
-          rating: 2,
-          img: "ava-5.png",
-          dateposted: "1 month ago",
-          review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
-        },
-        {
-          author: "Lucy Wu",
-          rating: 1,
-          img: "ava-6.png",
-          dateposted: "3 months ago",
-          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
-        },
-        {
-          author: "Naomi Lewis",
-          rating: 4,
-          img: "ava-1.png",
-          dateposted: "4 months ago",
-          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
         }
       ],
     },
@@ -376,7 +388,7 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
       reviews: [
         {
           author: "Srikant Ramakrishnan",
-          rating: 4,
+          rating: 5,
           img: "ava-1.png",
           dateposted: "1 day ago",
           review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
@@ -390,14 +402,14 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         },
         {
           author: "Miles",
-          rating: 3,
+          rating: 5,
           img: "ava-3.png",
           dateposted: "4 day ago",
           review: "First time with Cambodian food, and I'm hooked. Similar to Thai and Malaysian, plus they do kebobs. Great food, excellent value; we will be back. "
         },
         {
           author: "Nelson Wong",
-          rating: 4,
+          rating: 5,
           img: "ava-4.png",
           dateposted: "1 week ago",
           review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
@@ -408,20 +420,6 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
           img: "ava-5.png",
           dateposted: "1 month ago",
           review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
-        },
-        {
-          author: "Lucy Wu",
-          rating: 1,
-          img: "ava-6.png",
-          dateposted: "3 months ago",
-          review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
-        },
-        {
-          author: "Naomi Lewis",
-          rating: 4,
-          img: "ava-1.png",
-          dateposted: "4 months ago",
-          review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
         }
       ],
     },
@@ -447,14 +445,14 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
         reviews: [
           {
             author: "Srikant Ramakrishnan",
-            rating: 4,
+            rating: 1,
             img: "ava-1.png",
             dateposted: "1 day ago",
             review: "Loved the noodles, Shandong special dumplings were just ok. Had to wait about 1/2 hour, but we could watch the noodles being made and cooked while we waited. Inside is crowded and busy, but a happy vibe. "
           },
           {
             author: "David",
-            rating: 5,
+            rating: 4,
             img: "ava-2.png",
             dateposted: "1 day ago",
             review: "The best fried rice ever. I love this place so much and tell all of my friends. The dumplings are very good whether you choose to dine in or out or even grab a bag to prepare at home. I would suggest making a reservation if your party is more than 4 people on a weekend night. "
@@ -468,33 +466,18 @@ app.controller('PhoneListController', ['$scope', '$routeParams', function PhoneL
           },
           {
             author: "Nelson Wong",
-            rating: 4,
+            rating: 5,
             img: "ava-4.png",
             dateposted: "1 week ago",
             review: "The cambodian restaurant with the funny name. Good curries, solid papaya salads if your tired of same old chinese, korean, thai options give the bang a try."
-          },
-          {
-            author: "Paul Parker",
-            rating: 2,
-            img: "ava-5.png",
-            dateposted: "1 month ago",
-            review: "They are very pleasant and the special skewers where very good. It would be much better with a soda fountain and more selection of drinks and more atmosphere."
-          },
-          {
-            author: "Lucy Wu",
-            rating: 1,
-            img: "ava-6.png",
-            dateposted: "3 months ago",
-            review: "Went there for a late lunch and the place had more flies than people. Menu and furniture feels a bit worn. Food was good but not spectacular. Maybe better for dinner."
-          },
-          {
-            author: "Naomi Lewis",
-            rating: 4,
-            img: "ava-1.png",
-            dateposted: "4 months ago",
-            review: "The owners are very nice they treat me like family! Very happy that I found a restaurant similar to my grandmothers cooking. A++++ "
           }
        ],
     }
   ];
+
+  var init = function () {
+   $scope.updateAvgRatings();
+  };
+
+  init();
 }]);
