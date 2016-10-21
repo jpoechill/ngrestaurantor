@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <title>BARTor App</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+      <div class="container">
+        <a class="navbar-brand" href="#">BARTor</a>
+        <ul class="nav navbar-nav">
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container parent-div">
+      <div class="row">
+        <div class="col-lg-12"><h3>Schedule Information</h3></div>
+        <div class="col-lg-6">
+          <div>
+            <div class="dropdown">
+              <button class="dropdown-toggle btn btn-secondary" style="width: 100%;" type="button" id="dropDownTrainInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Departure Station
+              </button>
+              <ul class="dropdown-menu scrollable-menu" id="dropdownListTrainInfo" style="width: 100%;" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Default Departure Station</a></li>
+              </ul>
+            </div>
+          </div>
+          <br>
+        </div>
+        <div class="col-lg-6">
+          <div>
+            <div class="dropdown">
+              <button class="dropdown-toggle btn btn-secondary" style="width: 100%;" type="button" id="dropDownTrainInfoSecond" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Arrival Station
+              </button>
+              <ul class="dropdown-menu scrollable-menu" id="dropdownListTrainInfoSecond" style="width: 100%;" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Default Arrival Station</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 6px">
+        <div class="col-lg-6" style="margin-bottom: 24px">
+          <table class="table table-hover table-striped table-inverse">
+            <thead>
+              <tr>
+                <th style="width: 20%">Train</th>
+                <th style="width: 40%">Departures</th>
+                <th style="width: 40%">Arrivals</th>
+              </tr>
+            </thead>
+            <tbody class="" id="thisBartDataTable">
+                <tr><th scope="row">1</th><td></td><td></td></tr>
+                <tr><th scope="row">2</th><td></td><td></td></tr>
+                <tr><th scope="row">3</th><td></td><td></td></tr>
+                <tr><th scope="row">4</th><td></td><td></td></tr>
+                <tr><th scope="row">5</th><td></td><td></td></tr>
+                <tr><th scope="row">6</th><td></td><td></td></tr>
+                <tr><th scope="row">7</th><td></td><td></td></tr>
+                <tr><th scope="row">8</th><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-lg-6">
+          <div class="info-box1">
+            <span id="fare" style="font-size: 80px; text-align: center; font-weight: bold;">$ 0.00</span>
+            <h5 style="font-weight: 200; font-style: italic">fare</h5></div>
+          <div class="info-box2">
+            <span  style="font-size: 80px; text-align: center; font-weight: bold;" id="duration"> 0 mins</span>
+            <h5 style="font-weight: 200; font-style: italic">duration</h5></div>
+        </div>
+      </div>
+      </div>
+      <footer style="padding: 0px; margin-top: 0px">
+      </footer>
+    </div>
+
+    <link rel="stylesheet" href="css/styles.min.css">
+
+    <script src="js/main.min.js"></script>
+
+  </body>
+</html>
