@@ -19,7 +19,7 @@
             {{restaurant.blurb}}<br>
           </p>
           <br>
-          <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;" ng-controller="RestrController" >
+          <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
             <li style="margin: 0 12px 0 0; display: inline;"><i class="fa fa-heart" aria-hidden="true" ng-class="{liked: restaurant.liked == true}" ng-click="addLikes(getRestID(restaurant.link))"></i> {{restaurant.likes}}</li>
           </ul>
         </div>

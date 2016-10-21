@@ -82,7 +82,6 @@
 
           <!-- Start New Comments Form -->
           <div ng-show="!thisRestr.reviewed">
-
             <!-- Start hr -->
             <div class="row" style="margin-bottom: 4px;">
               <div class="">
@@ -107,7 +106,31 @@
               </div>
             </div>
             <!--  End new comment inputs -->
+          </div>
+          <!-- End New Comments Form -->
 
+          <!-- Start New Comments Form -->
+          <div ng-show="thisRestr.reviewed">
+            <!-- Start hr -->
+            <div class="row" style="margin-bottom: 4px;">
+              <div class="">
+                <div class="col-lg-8 offset-md-2" style="padding: 4px;">
+                  <hr>
+                </div>
+              </div>
+            </div>
+            <!-- End hr -->
+
+            <!--  Start new comment inputs -->
+            <div class="row" style="margin-bottom: 15px; margin-top: 12px;">
+              <div class="col-lg-1 offset-md-2" style="padding: 4px;">
+                <!-- <img src="/img/avatar/ava-4.png" style="float: right;" width="40px" alt="" /> -->
+              </div>
+              <div class="col-lg-7" style="text-align: center;s">
+                <span class="disable-text-selection" style="font-family: 'Montserrat', sans-serif; color: #B8BFD3; font-size: 16px; font-weight: 300; text-align: center;">Thank you for your review! 😄😄</span> <br>
+              </div>
+            </div>
+            <!--  End new comment inputs -->
           </div>
           <!-- End New Comments Form -->
 

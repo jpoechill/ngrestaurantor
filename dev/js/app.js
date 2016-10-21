@@ -17,16 +17,32 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
 
   $scope.pagelink = function () {
     // console.log("Hello, world@!");
-    //
-    // console.log("You are signed in.");
-    //
-    // $scope.isSignedIn = false;
 
     if ($scope.isSignedIn == false) {
       console.log("You are signed in.");
+      alert("Thank you for signing in.");
       $scope.isSignedIn = true;
+    } else {
+      console.log("You are signed out.");
+      $scope.isSignedIn = false;
     }
   };
+
+  $scope.pagelink.signedIn = function () {
+    if ($scope.isSignedIn == false) {
+      return "Sign in";
+    } else {
+      return "Sign out";
+    }
+  }
+
+  $scope.pagelink.signedInPicture = function () {
+    if ($scope.isSignedIn == false) {
+      return "/img/avatar/blank.png";
+    } else {
+      return "/img/avatar/ava-4.png";
+    }
+  }
 
   $scope.isSignedIn = false;
 
@@ -34,9 +50,13 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
 
   $scope.addLikes = function (restID) {
     var thisRest = this.restaurants[restID];
+    console.log(thisRest.liked);
+    // thisRest.likes=100;
+
     if (thisRest.liked == false) {
         thisRest.likes++;
         thisRest.liked = true;
+        this
     }
   };
 
@@ -93,7 +113,7 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
     var thisRest = this.restaurants[restID];
 
     if (thisRest.reviewed == false) {
-      thisRest.reviews.unshift(
+      thisRest.reviews.push(
         {
           author: $scope.currentUser,
           rating: $scope.currentRating,
@@ -108,7 +128,7 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
       $scope.updateAvgRatings();
     }
 
-    alert("Thank you for the review!");
+    // alert("Thank you for the review!");
   };
 
   $scope.getRestID = function (name) {
@@ -131,7 +151,7 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
       blurb: "When Battambang opened in Oakland in 1993, it was one of the very few Cambodian restaurants in the Bay Area. Now, more than 10 years later, it still is -- and it's also a pleasant place to get a sampling of the flavors of the Southeast Asian country. Battambang occupies a well-lit row of remodeled storefronts on the edge of Oakland's Chinatown. Walls are painted in warm pumpkin hues, lit by wall sconces and decorated with precisely spaced small framed paintings and an assortment of Cambodian artifacts... ",
       photo: "",
       liked: false,
-      likes: 10,
+      likes: 7,
       link: "battambang",
       reviewed: false,
       hours: {
@@ -197,7 +217,7 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
       liked: false,
       link: "cosecha",
       reviewed: false,
-      likes: 10,
+      likes: 8,
       hours: {
         mond: "8pm - 8pm",
         tues: "8pm - 8pm",
@@ -268,7 +288,7 @@ app.controller('RestrController', ['$scope', '$routeParams', function RestrContr
       link: "lecheval",
       reviewed: false,
       liked: false,
-      likes: 10,
+      likes: 9,
       hours: {
         mond: "8pm - 8pm",
         tues: "8pm - 8pm",
