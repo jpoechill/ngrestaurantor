@@ -50,7 +50,7 @@ gulp.task('scripts', function() {
   return gulp.src('dev/js/**/*.js')
     .pipe(concat('main.js'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dev/js/'));
 });
 

@@ -1,3 +1,7 @@
+[ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 .parent-div {
   position: relative;
 }
@@ -48,6 +52,26 @@ nav {
       text-align: right;
   }
 }
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  color: #999999;
+  font-size: .875rem;
+}
+
+/* align icon */
+.left-addon .fa  { left:  3px; top: 9px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
 
 .liked {
   color: red;
@@ -149,7 +173,9 @@ button {
     margin-bottom: 30px;
     background-color: white;
     // border-radius: 10px;
-    height: 300px;
+    height: 100%;
+    min-height: 300px;
+    overflow: hidden;
     // color: #D1D3D9;
     color: #373a3c;
     padding-top: 20px;
@@ -158,6 +184,7 @@ button {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     line-height: 1.5;
     // letter-spacing: 1px;
+    border-radius: 6px;
     padding: 0px;
     box-shadow: 0px 10px 12px #888888;
 }
@@ -177,7 +204,7 @@ button {
 .restaurant-item-2 {
     margin-bottom: 30px;
     background-color: white;
-    // border-radius: 10px;
+    border-radius: 6px;
     // height: 1750px;
     height: 100%;
     overflow: auto;
@@ -216,6 +243,31 @@ button {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
+@media (min-width: 480px){
+  .my-img {
+      max-height: 800px;
+  }
+}
+
+@media (min-width: 768px){
+  .my-img {
+      max-height: 380px;
+  }
+}
+
+@media (min-width: 992px){
+  .my-img {
+      max-height: 330px;
+  }
+}
+
+@media (min-width: 1200px){
+  .my-img {
+      max-height: 300px;
+  }
+}
+
+
 .fill {
     display: flex;
     justify-content: center;
@@ -231,6 +283,8 @@ button {
 #restaurant-image {
   // background: url('../img/rest_img.jpg') no-repeat center center;
   height: 100%;
+  // width: auto;
+  // overflow: hidden;
 }
 .carousel-caption {
   bottom: 80px;

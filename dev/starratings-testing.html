@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sampleApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+    <!-- Start Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <!-- End Angular -->
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+    <!-- End Firebase -->
+
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+    <!-- End AngularFire -->
+
+    <title>Restaurantor</title>
+
+  </head>
+
+  <body style="background-color: #F8F8F8;">
+    <header>
+      <!-- Start header -->
+      <nav class="navbar navbar-fixed-top bg-inverse">
+        <div class="container">
+          <ul class="nav navbar-nav pull-xs-left">
+            <li class="nav-item active">
+              <a class="navbar-brand" href="#/"><strong><span style="font-size: 1.5em; font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;">{{bird}}</strong></a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav" border="1px" width="400px">
+            <li class="nav-item" width="200px" style="margin-left: 0px; margin-top: 4px;">
+              <input type="search" name="name" width="200px" ng-model="searchquery.name" style="font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;" value="&#xf002; SEARCH RESTAURANTS">
+              <!-- <input type="button" name="name" value="&#xf107; FILTER"> -->
+              <!-- Example single danger button -->
+              <div class="btn-group">
+                <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-angle-down"></i> FILTER
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#/" ng-click="myFilter = {}">No Filter</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 5}">Rating: 5 Stars</a>
+                  <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 4}">Rating: 4 Stars</a>
+                  <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 3}">Rating: 3 Stars</a>
+                  <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 2}">Rating: 2 Stars</a>
+                  <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 1}">Rating: 1 Stars</a>
+                  <!-- <a class="dropdown-item" href="#/">Rating Low-High</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#/">Alphabet A-Z</a>
+                  <a class="dropdown-item" href="#/">Alphabet Z-A</a> -->
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav pull-xs-right">
+            <!-- <li class="nav-item" style="margin-right: 6px; margin-top: 10px;">
+              <a class="navbar-brand" href="#/"><strong><span style="font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial;"> <i class="fa fa-angle-down"></i> </strong></a>
+            </li> -->
+            <li class="nav-item" style="margin-left: 0px; margin-top: 10px;">
+              <span style="color: black;"></span>
+              <div class="dropdown">
+                <input type="image" ng-src="{{url}}" width="40px" id="dropdownMenu2" data-toggle="dropdown" >
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" ng-click="pagelink()">{{pagelink.signedIn()}}</a>
+                </div>
+              </div>
+            </li>
+            <!-- <li class="nav-item active">
+              <a class="navbar-brand" href="#/"><strong><span style="font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial;">Login | Sign Up</strong></a>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- End header -->
+
+    <!-- <div  ng-app="sampleApp" ng-controller="SampleCtrl"> -->
+      <!-- anything typed in here is magically saved to our Firebase database! -->
+      <!-- <input type="text" ng-model="birder.text"/> -->
+      <!-- all changes from our Firebase database magically appear here! -->
+      <!-- <h1>You said: {{ birder.text }}</h1> -->
+    <!-- </div> -->
+
+      <w3-test-directive></w3-test-directive>
+
+      <!-- <ul >
+           <li ng-repeat="message in messages">{{ data }} |</li>
+      </ul> -->
+    </div>
+    <!-- Start Angular view -->
+    <ng-view autoscroll="true"></ng-view>
+    <!-- End Angular view -->
+
+    <!--build:css css/styles.min.css-->
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/styles.min.css" rel="stylesheet">
+    <!--endbuild-->
+
+    <!--build:js js/main.min.js -->
+
+    <!-- Restaurant App -->
+    <script src="../js/app.js"></script>
+    <!-- End Restaurant App-->
+
+    <!-- Restaurant ng-controllers.js file -->
+    <script src="../js/directives/clickRatingsDirective.js"></script>
+    <!-- Restaurant ng-controllers.js file -->
+
+    <!-- Restaurant ng-controllers.js file -->
+    <script src="../js/controllers/ClickRatingsController.js"></script>
+    <!-- Restaurant ng-controllers.js file -->
+
+
+    <!-- Restaurant ng-config.js file -->
+    <script src="../js/routes/mainRoutes.js"></script>
+    <!-- Restaurant ng-config.js file -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../css/bootstrap.min.js"></script>
+
+  </body>
+</html>

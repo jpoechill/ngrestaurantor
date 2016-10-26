@@ -72,7 +72,7 @@
               <img src="/img/avatar/{{review.img}}" style="float: right;" width="40px" alt="" />
             </div>
             <div class="col-lg-7">
-              <span style="color: #4BE1AB;">{{showStars(review.rating)}}</span><br>
+              <span style="color: #4BE1AB;">{{showReviewStars(review.rating)}}</span><br>
               <small><strong>{{review.author}}</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{review.dateposted}}</span><br>
               <span style="color: 34A526E; font-size: 14px;">
               {{review.review}}</span>
@@ -80,8 +80,10 @@
           </div>
           <!--  End single reviews -->
 
+
+
           <!-- Start New Comments Form -->
-          <div ng-show="!thisRestr.reviewed">
+          <div ng-show="thisRestr.reviewed">
             <!-- Start hr -->
             <div class="row" style="margin-bottom: 4px;">
               <div class="">
@@ -95,10 +97,11 @@
             <!--  Start new comment inputs -->
             <div class="row" style="margin-bottom: 0px; margin-top: 16px;">
               <div class="col-lg-1 offset-md-2" style="padding: 4px;">
-                <img src="/img/avatar/ava-4.png" style="float: right;" width="40px" alt="" />
+                <img src="/img/avatar/blank.png" style="float: right;" width="40px" alt="" />
               </div>
               <div class="col-lg-7">
-                <span class="disable-text-selection" style="color: #4BE1AB;" ng-click="clickedStars()">{{showCurrentRating(currentRating)}}</span> <br>
+                <w3-test-directive></w3-test-directive>
+                <!-- <span class="disable-text-selection" style="color: #4BE1AB;" ng-click="clickedStars()">{{showCurrentRating(currentRating)}}</span> <br> -->
                 <!-- <small><strong>Srikant Ramakrishnan</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 minutes ago</span><br> -->
                 <!-- <span style="font-size: 14px;"> -->
                 <textarea name="name" rows="8" cols="40" style="margin-top: 8px; font-size: 14px; width: 100%; background-color: #F0F2F7; color: #b0b0b0; padding: 8px; border: 1px solid #E3E8F0;" ng-model="myReview"></textarea>
@@ -109,7 +112,32 @@
           </div>
           <!-- End New Comments Form -->
 
-          <!-- Start New Comments Form -->
+          <!-- Start thank you message -->
+          <div ng-show="!thisRestr.reviewed">
+            <!-- Start hr -->
+            <div class="row" style="margin-bottom: 4px;">
+              <div class="">
+                <div class="col-lg-8 offset-md-2" style="padding: 4px;">
+                  <hr>
+                </div>
+              </div>
+            </div>
+            <!-- End hr -->
+
+            <!--  Start new comment inputs -->
+            <div class="row" style="margin-bottom: 15px; margin-top: 12px;">
+              <div class="col-lg-1 offset-md-2" style="padding: 4px;">
+                <!-- <img src="/img/avatar/ava-4.png" style="float: right;" width="40px" alt="" /> -->
+              </div>
+              <div class="col-lg-7" style="text-align: center;s">
+                <span style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 300; text-align: center;">Please <a href="" style="text-decoration: underline;">login</a> to write a review</span> <br>
+              </div>
+            </div>
+            <!--  End new comment inputs -->
+          </div>
+          <!-- End thank you message  -->
+
+          <!-- Start thank you message -->
           <div ng-show="thisRestr.reviewed">
             <!-- Start hr -->
             <div class="row" style="margin-bottom: 4px;">
@@ -132,7 +160,7 @@
             </div>
             <!--  End new comment inputs -->
           </div>
-          <!-- End New Comments Form -->
+          <!-- End thank you message  -->
 
         </div>
 
