@@ -34,3 +34,34 @@ app.run( function( $rootScope ) {
      firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
    }());
 });
+
+// Define RestrController
+app.controller('myController', function myController($scope, $routeParams, message) {
+
+  $scope.bird = "Nerd";
+  $scope.sayHello = function () {
+    // alert("Hello, world!");
+    console.log("You clicked me");
+    return "Bird";
+  }
+
+
+
+});
+
+
+
+app.filter("searchquery", function(localizationService) {
+
+  function localization(value) {
+
+    if (localizationService.text && localizationService.text.hasOwnProperty(value)) {
+      return localizationService.text[value];
+    }
+    return value;
+  }
+
+  localization.$stateful = true;
+
+  return localization;
+});

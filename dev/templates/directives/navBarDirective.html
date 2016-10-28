@@ -1,0 +1,72 @@
+<!-- Start nav -->
+<nav class="navbar navbar-fixed-top bg-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav pull-xs-left">
+      <li class="nav-item active">
+        <a class="navbar-brand" href="#/"><strong><span style="font-size: 1.5em; font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;" ng-click="searchquery.name = ''; myFilter = {}">Restaurantor 123 {{bird}}</strong></a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav" border="1px" width="400px">
+      <li class="nav-item" width="200px" style="margin-left: 0px; margin-top: 4px;">
+        <div class="inner-addon left-addon" style="float: left;">
+          <a href="" class="search-icon">
+              <i class="fa fa-search" id="myimage"></i>
+          </a>
+          <form class="" ng-submit="myFunc()">
+
+          </form>
+          <input type="search" name="name" width="200px" results ng-model="searchquery.name" style="margin-top: 10px; padding-left: 34px; font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;" placeholder="SEARCH RESTAURANTS"> <!-- &#xf002; -->
+        </div>
+
+        <!-- <input type="button" name="name" value="&#xf107; FILTER"> -->
+        <!-- Example single danger button -->
+        <div class="btn-group">
+          <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-angle-down"></i> FILTER
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#/" ng-click="myFilter = {}">No Filter</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 5}">Rating: 5 Stars</a>
+            <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 4}">Rating: 4 Stars</a>
+            <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 3}">Rating: 3 Stars</a>
+            <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 2}">Rating: 2 Stars</a>
+            <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 1}">Rating: 1 Stars</a>
+            <!-- <a class="dropdown-item" href="#/">Rating Low-High</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#/">Alphabet A-Z</a>
+            <a class="dropdown-item" href="#/">Alphabet Z-A</a> -->
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav pull-xs-right">
+      <!-- <li class="nav-item" style="margin-right: 6px; margin-top: 10px;">
+        <a class="navbar-brand" href="#/"><strong><span style="font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial;"> <i class="fa fa-angle-down"></i> </strong></a>
+      </li> -->
+      <li class="nav-item" style="margin-left: 0px; margin-top: 10px;">
+        <!-- <div class="dropdown">
+          <input type="image" src="/img/avatar/ava-4.png" width="40px" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <h6 class="dropdown-header" style="font-weight: 500;">Jamaica Les Denardo</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" ng-click="pagelink()">Sign out</a>
+          </div>
+        </div> --> <span style="color: black;"></span>
+        <div class="dropdown" ng-controller="LoginController">
+          <img type="image" ng-src="{{getUrl()}}" width="40px" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="User Avatar" style="border-radius: 40px;">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <span ng-if="!isLoggedIn"><a class="dropdown-item" ng-click="pagelink()">{{hello}}</a></span>
+            <span ng-show="isLoggedIn"><a class="dropdown-header" style="font-size: 1rem;">{{usrName}}</a></span>
+            <div  ng-show="isLoggedIn" class="dropdown-divider"></div>
+            <span ng-show="!isLoggedIn" ng-click="login()"><a class="dropdown-item">Sign In</a></span>
+            <span ng-show="isLoggedIn"><a class="dropdown-item" ng-click="logout()">Sign Out</a></span>
+          </div>
+        </div>
+      </li>
+      <!-- <li class="nav-item active">
+        <a class="navbar-brand" href="#/"><strong><span style="font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial;">Login | Sign Up</strong></a>
+      </li> -->
+    </ul>
+  </div>
+</nav>

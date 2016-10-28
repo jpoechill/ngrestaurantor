@@ -1,20 +1,47 @@
 // Define Hexafy
 app.service('hexafy', function() {
   // var myServiceVal = "Bird";
-  var myUrl = "/img/avatar/blank.png";
-
-  // var service = {
-  //   foo: "Bird"
+  // var myUrl = "/img/avatar/blank.png";
+  // var isSignedIn = "Blue";
+  var service = {
+    myUrl: "/img/avatar/blank.png",
+    myUserName: "",
+    isSignedIn: false,
+    getUrl: function () {
+      return service.myUrl;
+    },
+    getUserName: function () {
+      return service.myUserName;
+    },
+    setUserName: function (input) {
+      service.myUserName = input;
+    },
+    changeUrl: function (input) {
+      service.myUrl = input;
+    },
+    getSignedIn: function () {
+      return service.isSignedIn;
+    },
+    signIn: function () {
+      service.isSignedIn = true;
+    },
+    signOut: function () {
+      service.isSignedIn = false;
+    }
+  };
+  //
+  // this.isSignedInFunc = function () {
+  //   return isSignedIn;
   // };
 
-  this.getUrl = function () {
-    return myUrl;
-  }
+  // this.signIn = function () {
+  //   isSignedIn = true;
+  // }
+  //
+  // this.signOut = function () {
+  //   isSignedIn = false;
+  // }
 
-  this.changeUrl = function (input) {
-    myUrl = input;
-    // console.log("Url changed");
-  }
   //
   // // this.getAvatar = function () {
   // //   return myUrl;
@@ -41,5 +68,5 @@ app.service('hexafy', function() {
   //   console.log(myUrl);
   // };
 
-  // return service;
+  return service;
 });

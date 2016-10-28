@@ -1,15 +1,21 @@
 // Define RestrController
-app.controller('RestrController', function RestrController($scope, $routeParams, message) {
+app.controller('RestrController', function RestrController($scope, $routeParams, message, hexafy) {
   $scope.restaurants = message;
 
+  $scope.isSignedIn = hexafy.getSignedIn();
   // console.log($scope.restaurants);
+
+  $scope.getAvatar = hexafy.getUrl();
 
   for (var i = 0; i < $scope.restaurants.length; i++) {
     // console.log($scope.restaurants[i].name);
   };
 
+  $scope.bird = "Nerd";
   $scope.sayHello = function () {
-    alert("Hello, world!");
+    // alert("Hello, world!");
+    console.log("You clicked me");
+    return "Bird";
   }
 
   $scope.page = $routeParams;
@@ -28,7 +34,7 @@ app.controller('RestrController', function RestrController($scope, $routeParams,
     }
   };
 
-  $scope.currentUser = "Jamaica Les Denardo"
+  $scope.currentUser = hexafy.getUserName();
 
   $scope.currentRating = 0;
 
@@ -68,7 +74,7 @@ app.controller('RestrController', function RestrController($scope, $routeParams,
         {
           author: $scope.currentUser,
           rating: $scope.currentRating,
-          img: "ava-3.png",
+          img: $scope.getAvatar,
           dateposted: "2 minutes ago",
           review: $scope.myReview
         }
