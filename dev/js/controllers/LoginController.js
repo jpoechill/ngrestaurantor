@@ -1,8 +1,9 @@
 // Define Login Controller
-app.controller('LoginController', function ($scope, $facebook, hexafy, $timeout) {
-  $scope.isLoggedIn = false;
+app.controller('LoginController', function ($scope, $facebook, hexafy) {
   $scope.socialLogoUrl = "img/facebook.png";
-  $scope.usrName = "";
+  $scope.getCurrentUser = hexafy.getUserName;
+  $scope.getUrl = hexafy.getUrl;
+  $scope.getLoggedIn = hexafy.getSignedIn;
 
   $scope.login = function() {
     $facebook.login().then(function() {
@@ -12,13 +13,13 @@ app.controller('LoginController', function ($scope, $facebook, hexafy, $timeout)
   }
 
   $scope.logout = function() {
-    $scope.isLoggedIn = false;
-    $scope.welcomeMsg = "Please log in ...";
-    $scope.usrProfilePicture = "";
-    hexafy.signOut;
-    $facebook.logout().then(function() {
-      $scope.refresh();
-    });
+    // $scope.isLoggedIn = false;
+    // $scope.welcomeMsg = "Please log in ...";
+    // $scope.usrProfilePicture = "";
+    hexafy.signOut();
+    // $facebook.logout().then(function() {
+    //   $scope.refresh();
+    // });
   }
 
   function fetchProfilePic(userid) {
@@ -37,8 +38,10 @@ app.controller('LoginController', function ($scope, $facebook, hexafy, $timeout)
     $facebook.api("/me").then(
       function(response) {
         $scope.welcomeMsg = "Welcome, " + response.name;
-        // console.log(response);
+        console.log("Bird 123 " + response.name);
+        console.log(hexafy.getUserName());
         hexafy.setUserName(response.name);
+        console.log(hexafy.getUserName());
         fetchProfilePic(response.id);
         $scope.isLoggedIn = true;
       },
@@ -46,8 +49,6 @@ app.controller('LoginController', function ($scope, $facebook, hexafy, $timeout)
         $scope.welcomeMsg = "Please log in ...";
       });
   }
-
-  $scope.getUrl = hexafy.getUrl;
 
   $scope.changeUrl = function (input) {
     return hexafy.changeUrl(input);

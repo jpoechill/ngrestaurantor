@@ -5,7 +5,7 @@ app.service('hexafy', function() {
   // var isSignedIn = "Blue";
   var service = {
     myUrl: "/img/avatar/blank.png",
-    myUserName: "",
+    myUserName: "123",
     isSignedIn: false,
     getUrl: function () {
       return service.myUrl;
@@ -27,6 +27,8 @@ app.service('hexafy', function() {
     },
     signOut: function () {
       service.isSignedIn = false;
+      console.log("You've signed out!");
+      service.myUrl = "/img/avatar/blank.png";
     }
   };
   //
