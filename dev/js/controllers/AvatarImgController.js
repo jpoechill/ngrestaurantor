@@ -10,7 +10,7 @@ app.controller('AvatarImgController', ['$scope', '$location', 'hexafy', '$facebo
   // };
   // $scope.url = hexfy.getAvatar();
 
-  $scope.url = "/img/avatar/blank.png";
+  $scope.url = "img/avatar/blank.png";
   $scope.usrName = "";
 
   $scope.getUrl = hexafy.getUrl;
