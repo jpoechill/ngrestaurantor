@@ -76,7 +76,7 @@ gulp.task('watch', function () {
 
 // Optimize images
 gulp.task('images', function() {
-  return gulp.src('dev/img/**/*.+(png|jpg|jpeg|gif|svg)')
+  return gulp.src('dev/img/**/*.+(png|jpg|jpeg|gif|ico|svg)')
     .pipe(cache(imagemin({
         interlaced: true
     })))
