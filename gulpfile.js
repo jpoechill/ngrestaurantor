@@ -113,6 +113,19 @@ gulp.task('move-sw', function() {
     .pipe(gulp.dest('dist/'));
 });
 
+// Move templates
+gulp.task('move-templates:dist', function() {
+    gulp.src('dev/templates/**/*')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('dist/templates'));
+});
+
+gulp.task('move-js:dist', function() {
+    gulp.src('dev/js/**/*')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('dist/js'));
+});
+
 // Build Sequences
 // ---------------
 
@@ -133,7 +146,8 @@ gulp.task('serve', function (callback) {
 // Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['useref:dist', 'sass', 'move-sw', 'images'],
+        ['useref:dist', 'sass', 'move-templates:dist', 'move-js:dist', 'move-sw', 'images'],
+
         'browser-sync:dist',
         callback
     );

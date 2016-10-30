@@ -1,0 +1,36 @@
+<section>
+  <div class="container">
+    <div class="row" id="main-container">
+
+      <div class="col-md-6 offset-md-3 align-middle restaurant-item" style="padding: 50px; border-radius: 20px; text-align: center; float: none;
+    display: inline-block; vertical-align: middle; background-size: cover; height: 100%;">
+        <p>
+          {{welcomeMsg}}
+          <p>
+            {{mySignInAndSignOutText}}
+          </p>
+          <!-- <p>
+            {{url}}
+          </p>
+          <p>
+            <img type="image" ng-src="{{getUrl()}}" width="40px" ng-click="myFunc()" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="User Avatar" style="border-radius: 40px;">
+          </p>
+          <p>
+            <button ng-click="changeUrl()" >Change Url</button>
+          </p> -->
+          <!-- <a href="" ng-click="login()">Login please</a> <br> -->
+          <!-- {{isLoggedIn}} -->
+        </p>
+        <div ng-show="isLoggedIn">
+          <span style="font-size: 120px">👍</span>
+          <!-- <img ng-show="isLoggedIn" ng-src="{{usrProfilePicture || '//:0' }}" style="border-radius: 100px;" alt="User profile picture"> -->
+          <p>
+             <!-- <a href="" ng-click="logout()">Logout.</a> -->
+          </p>
+        </div>
+        <div ng-hide="isLoggedIn" ng-cloak>
+            <a href="" ng-click="login()"><img width="36%" style="margin: 20px; min-width: 140px;" ng-src="{{socialLogoUrl}}"></a>
+        </div>
+    </div>
+  </div>
+</section>
