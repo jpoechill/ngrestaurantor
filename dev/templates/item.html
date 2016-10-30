@@ -51,9 +51,6 @@
             </p>
           </div>
         </div>
-
-
-
         <!-- <div id="restaurant-image" class="col-md-3 fill">
           <a href="#/{{phone.link}}"><img src="../img/food/salad_cut-2.png" alt="" /></a>
         </div><br> -->
@@ -64,14 +61,14 @@
         <div class="col-md-12" style="padding: 30px; background-color: #FDFDFD;">
 
           <p style="text-align: center; padding-top: 0px; padding-bottom: 14px;">
-                    {{isSignedIn}} BIRD {{bird}}
+                    {{isSignedIn}}
             <span style="font-family: 'Montserrat', sans-serif; color: #222328; font-size: 16px; font-weight: 700;">{{thisRestr.reviews.length}} Reviews</span>
           </p>
 
           <!--  Start single reviews -->
           <div class="row" style="margin-bottom: 20px;"  ng-repeat="review in thisRestr.reviews">
             <div class="col-lg-1 offset-md-2" style="padding: 4px;">
-              <img src="{{review.img}}" style="float: right; border-radius: 40px;" width="40px" alt="" />
+              <img ng-src="{{review.img}}" style="float: right; border-radius: 40px;" width="40px" alt="" />
             </div>
             <div class="col-lg-7">
               <span style="color: #4BE1AB;">{{showReviewStars(review.rating)}}</span><br>
@@ -85,7 +82,7 @@
 
 
           <!-- Start New Comments Form -->
-          <div ng-show="isSignedIn && !thisRestr.reviewed">
+          <div ng-show="isSignedIn() && !thisRestr.reviewed">
             <!-- Start hr -->
             <div class="row" style="margin-bottom: 4px;">
               <div class="">
@@ -99,7 +96,7 @@
             <!--  Start new comment inputs -->
             <div class="row" style="margin-bottom: 0px; margin-top: 16px;">
               <div class="col-lg-1 offset-md-2" style="padding: 4px;">
-                <img ng-src="{{getAvatar}}" style="float: right; border-radius: 40px;" width="40px" alt="" />
+                <img ng-src="{{getAvatar()}}" style="float: right; border-radius: 40px;" width="40px" alt="" />
               </div>
               <div class="col-lg-7">
                 <w3-test-directive></w3-test-directive>
@@ -115,7 +112,7 @@
           <!-- End New Comments Form -->
 
           <!-- Start login prompt -->
-          <div ng-show="!isSignedIn" >
+          <div ng-show="!isSignedIn()" >
             <!-- Start hr -->
             <div class="row" style="margin-bottom: 4px;">
               <div class="">
@@ -132,7 +129,7 @@
                 <!-- <img src="/img/avatar/ava-4.png" style="float: right;" width="40px" alt="" /> -->
               </div>
               <div class="col-lg-7" style="text-align: center;s">
-                <span style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 300; text-align: center;">Please <a href="#/login" style="text-decoration: underline;">sign in</a> to write a review</span> <br>
+                <span style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 300; text-align: center;">Please <a href="" ng-click="login()" style="text-decoration: underline;">sign in</a> to write a review</span> <br>
               </div>
             </div>
             <!--  End new comment inputs -->
@@ -140,7 +137,7 @@
           <!-- End login prompt -->
 
           <!-- Start thank you message -->
-          <div ng-show="thisRestr.reviewed">
+          <div ng-show="thisRestr.reviewed && isSignedIn()">
             <!-- Start hr -->
             <div class="row" style="margin-bottom: 4px;">
               <div class="">

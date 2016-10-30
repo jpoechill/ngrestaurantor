@@ -1,5 +1,5 @@
 // Define Login Controller
-app.controller('LoginController', function ($scope, $facebook, hexafy) {
+app.controller('LoginController', ['$scope', '$facebook', 'hexafy', function ($scope, $facebook, hexafy) {
   $scope.socialLogoUrl = "img/facebook.png";
   $scope.getCurrentUser = hexafy.getUserName;
   $scope.getUrl = hexafy.getUrl;
@@ -55,4 +55,4 @@ app.controller('LoginController', function ($scope, $facebook, hexafy) {
   }
 
   $scope.refresh();
-});
+}]);

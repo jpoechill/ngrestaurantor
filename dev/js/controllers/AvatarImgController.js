@@ -1,5 +1,5 @@
 // Define 'AvatarImgController' controller
-app.controller('AvatarImgController', ['$scope', '$location', '$facebook', function AvatarImgController($scope, $location, hexafy, $facebook) {
+app.controller('AvatarImgController', ['$scope', '$location', 'hexafy', '$facebook', function AvatarImgController($scope, $location, hexafy, $facebook) {
   // $scope.pagelink = function () {
   //   if ($scope.isLoggedIn == false) {
   //     $location.path("/login");

@@ -1,11 +1,54 @@
 // Define RestrController
-app.controller('RestrController', function RestrController($scope, $routeParams, message, hexafy) {
+app.controller('RestrController', ['$scope', '$routeParams', 'message', 'hexafy', '$facebook', function RestrController($scope, $routeParams, message, hexafy, $facebook) {
   $scope.restaurants = message;
 
-  $scope.isSignedIn = hexafy.getSignedIn();
+  $scope.isSignedIn = hexafy.getSignedIn;
   // console.log($scope.restaurants);
 
-  $scope.getAvatar = hexafy.getUrl();
+  $scope.getAvatar = hexafy.getUrl;
+
+  $scope.login = function() {
+    $facebook.login().then(function() {
+      hexafy.signIn();
+      $scope.refresh();
+    });
+  }
+
+  function fetchProfilePic(userid) {
+    $facebook.api("/" + userid + "/picture?type=large").then(
+      function(response) {
+        $scope.usrProfilePicture = response.data.url;
+        $scope.changeUrl(response.data.url);
+        $scope.isLoggedIn = true;
+      },
+      function(err) {
+        console.log("Could not fetch profile picture.");
+      });
+  }
+
+  $scope.myFunction = function () {
+    alert("Say bloo");
+  }
+
+  $scope.refresh = function () {
+    $facebook.api("/me").then(
+      function(response) {
+        $scope.welcomeMsg = "Welcome, " + response.name;
+        console.log("Bird 123 " + response.name);
+        console.log(hexafy.getUserName());
+        hexafy.setUserName(response.name);
+        console.log(hexafy.getUserName());
+        fetchProfilePic(response.id);
+        $scope.isLoggedIn = true;
+      },
+      function(err) {
+        $scope.welcomeMsg = "Please log in ...";
+      });
+  }
+
+  $scope.changeUrl = function (input) {
+    return hexafy.changeUrl(input);
+  }
 
   for (var i = 0; i < $scope.restaurants.length; i++) {
     // console.log($scope.restaurants[i].name);
@@ -34,7 +77,7 @@ app.controller('RestrController', function RestrController($scope, $routeParams,
     }
   };
 
-  $scope.currentUser = hexafy.getUserName();
+  $scope.currentUser = hexafy.getUserName;
 
   $scope.currentRating = 0;
 
@@ -72,9 +115,9 @@ app.controller('RestrController', function RestrController($scope, $routeParams,
     if (thisRest.reviewed == false) {
       thisRest.reviews.push(
         {
-          author: $scope.currentUser,
+          author: $scope.currentUser(),
           rating: $scope.currentRating,
-          img: $scope.getAvatar,
+          img: $scope.getAvatar(),
           dateposted: "2 minutes ago",
           review: $scope.myReview
         }
@@ -105,4 +148,4 @@ app.controller('RestrController', function RestrController($scope, $routeParams,
   };
 
   init();
-});
+}]);

@@ -35,33 +35,50 @@ app.run( function( $rootScope ) {
    }());
 });
 
+/*
+This directive allows us to pass a function in on an enter key to do what we want.
+ */
+// app.directive('ngEnter', function () {
+//     return function (scope, element, attrs) {
+//         element.bind("keydown keypress", function (event) {
+//             if(event.which === 13) {
+//                 scope.$apply(function (){
+//                     scope.$eval(attrs.ngEnter);
+//                 });
+//
+//                 event.preventDefault();
+//             }
+//         });
+//     };
+// });
+
 // Define RestrController
-app.controller('myController', function myController($scope, $routeParams, message) {
-
-  $scope.bird = "Nerd";
-  $scope.sayHello = function () {
-    // alert("Hello, world!");
-    console.log("You clicked me");
-    return "Bird";
-  }
-
-
-
-});
-
-
-
-app.filter("searchquery", function(localizationService) {
-
-  function localization(value) {
-
-    if (localizationService.text && localizationService.text.hasOwnProperty(value)) {
-      return localizationService.text[value];
-    }
-    return value;
-  }
-
-  localization.$stateful = true;
-
-  return localization;
-});
+// app.controller('myController', function myController($scope, $routeParams, message) {
+//
+//   $scope.bird = "Nerd";
+//   $scope.sayHello = function () {
+//     // alert("Hello, world!");
+//     console.log("You clicked me");
+//     return "Bird";
+//   }
+//
+//
+//
+// });
+//
+//
+//
+// app.filter("searchquery", function(localizationService) {
+//
+//   function localization(value) {
+//
+//     if (localizationService.text && localizationService.text.hasOwnProperty(value)) {
+//       return localizationService.text[value];
+//     }
+//     return value;
+//   }
+//
+//   localization.$stateful = true;
+//
+//   return localization;
+// });
