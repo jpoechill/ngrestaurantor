@@ -9,8 +9,6 @@ Topics covered: Accessibility, Javascript Frameworks
 
 ## To run app in development mode:
 1. Enter `gulp serve` from the command line.
-2. Enjoy app.
 
 ## To run app in production mode:
 1. Enter `gulp serve:dist` from the command line.
-2. Enjoy app.

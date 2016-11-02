@@ -190,10 +190,10 @@ button:hover, button:focus {
 }
 
 .monty-font-reg {
-  color: #B9BED1;
+  color: #464d6b;
   font-size: small;
   font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
@@ -257,7 +257,7 @@ button:hover, button:focus {
     min-height: 100%
 }
 
-#restaurant-image {
+.restaurant-image {
   height: 100%;
 }
 .carousel-caption {

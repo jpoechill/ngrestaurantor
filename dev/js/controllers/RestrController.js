@@ -1,10 +1,7 @@
 // Define RestrController
 app.controller('RestrController', ['$scope', '$routeParams', 'message', 'hexafy', '$facebook', function RestrController($scope, $routeParams, message, hexafy, $facebook) {
   $scope.restaurants = message;
-
   $scope.isSignedIn = hexafy.getSignedIn;
-  // console.log($scope.restaurants);
-
   $scope.getAvatar = hexafy.getUrl;
 
   $scope.login = function() {
@@ -34,11 +31,13 @@ app.controller('RestrController', ['$scope', '$routeParams', 'message', 'hexafy'
     $facebook.api("/me").then(
       function(response) {
         $scope.welcomeMsg = "Welcome, " + response.name;
-        console.log("Bird 123 " + response.name);
-        console.log(hexafy.getUserName());
-        hexafy.setUserName(response.name);
-        console.log(hexafy.getUserName());
-        fetchProfilePic(response.id);
+        // Uncomment below for live mode
+        // hexafy.setUserName(response.name);
+        hexafy.setUserName('Poamrong Rith');
+        // console.log(hexafy.getUserName());
+        $scope.changeUrl('https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14433090_10155342528024358_2772040946477423605_n.jpg?oh=5e7357bd902e31b762b30a1b5b721e4d&oe=588A8038');
+        // Uncomment below for live mode
+        // fetchProfilePic(response.id);
         $scope.isLoggedIn = true;
       },
       function(err) {
@@ -48,17 +47,6 @@ app.controller('RestrController', ['$scope', '$routeParams', 'message', 'hexafy'
 
   $scope.changeUrl = function (input) {
     return hexafy.changeUrl(input);
-  }
-
-  for (var i = 0; i < $scope.restaurants.length; i++) {
-    // console.log($scope.restaurants[i].name);
-  };
-
-  $scope.bird = "Nerd";
-  $scope.sayHello = function () {
-    // alert("Hello, world!");
-    console.log("You clicked me");
-    return "Bird";
   }
 
   $scope.page = $routeParams;
