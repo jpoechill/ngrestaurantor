@@ -148,9 +148,8 @@ gulp.task('serve', function (callback) {
 // Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['useref:dist', 'sass', 'move-templates:dist', 'move-sw', 'images'],
+        ['useref:dist', 'move-templates:dist', 'images'],
         'browser-sync:dist',
-        // 'move-js:dist',
         callback
     );
 });

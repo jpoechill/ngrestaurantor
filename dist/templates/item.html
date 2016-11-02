@@ -34,7 +34,13 @@
             <p>
               {{thisRestr.blurb}}
             </p>
-            <span class="monty-font-reg"><i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i> {{thisRestr.likes}}</li></span>
+            <!-- <span class="monty-font-reg"><i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i> {{thisRestr.likes}}</li></span> -->
+            <div class="monty-font-reg" style="text-decoration: none">
+              <a href="" class="monty-font-reg">
+                <i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i></a>
+                 {{thisRestr.likes}}
+            </div>
+
           </div>
           <div class="col-md-3">
             <p>
