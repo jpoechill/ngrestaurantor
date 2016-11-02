@@ -15,6 +15,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
+var ngAnnotate = require('gulp-ng-annotate');
 
 // DEVELOPMENT TASKS
 // -----------------
@@ -91,6 +92,7 @@ gulp.task('clean:dist', function() {
 gulp.task('useref:dist', function(){
   return gulp.src('dev/*.html')
     .pipe(useref())
+    .pipe(gulpIf('*.js', ngAnnotate()))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'));
@@ -120,11 +122,11 @@ gulp.task('move-templates:dist', function() {
     .pipe(gulp.dest('dist/templates'));
 });
 
-gulp.task('move-js:dist', function() {
-    gulp.src('dev/js/**/*')
-    // Perform minification tasks, etc here
-    .pipe(gulp.dest('dist/js'));
-});
+// gulp.task('move-js:dist', function() {
+//     gulp.src('dev/js/**/*')
+//     // Perform minification tasks, etc here
+//     .pipe(gulp.dest('dist/js'));
+// });
 
 // Build Sequences
 // ---------------
@@ -146,9 +148,9 @@ gulp.task('serve', function (callback) {
 // Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['useref:dist', 'sass', 'move-templates:dist', 'move-js:dist', 'move-sw', 'images'],
-
+        ['useref:dist', 'sass', 'move-templates:dist', 'move-sw', 'images'],
         'browser-sync:dist',
+        // 'move-js:dist',
         callback
     );
 });

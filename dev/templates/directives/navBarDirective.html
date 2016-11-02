@@ -1,26 +1,30 @@
-<!-- Start nav -->
-<nav class="navbar navbar-fixed-top bg-inverse">
+<nav class="navbar navbar-light bg-faded navbar-fixed-top" >
   <div class="container">
-    <ul class="nav navbar-nav pull-xs-left">
-      <li class="nav-item active">
-        <a class="navbar-brand" href="#/"><strong><span style="font-size: 1.5em; font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;" ng-click="searchquery.name = ''; myFilter = {}">Restaurantor {{bird}}</strong></a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav" border="1px" width="400px">
-      <li class="nav-item" width="200px" style="margin-left: 0px; margin-top: 4px;">
+  <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
+  <div class="collapse navbar-toggleable-md" id="navbarResponsive" style="text-align: center;">
+    <a class="navbar-brand" href="#/">
+      <strong>
+        <span style="font-size: 1.5em; font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;" ng-click="searchquery.name = ''; myFilter = {}">
+          Restaurantor
+        </span>
+      </strong>
+    </a>
+    <ul class="nav navbar-nav" style="display: inline-block;">
+      <li class="nav-item" style="margin-top: 4px;">
         <div class="inner-addon left-addon" style="float: left;">
-          <a href="" class="search-icon">
+          <a href="" class="search-icon" tabindex="-1">
               <i class="fa fa-search" id="myimage"></i>
           </a>
-          <form ng-submit="myFunction()">{{bird}}
-            <input type="search" name="name" width="200px" results ng-model="searchquery.name" ng-click="searchquery = {name: ''}" style="margin-top: 10px; padding-left: 34px; font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;" placeholder="SEARCH RESTAURANTS"> <!-- &#xf002; -->
-          </form>
-          </div>
-        <div class="btn-group">
-          <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-angle-down"></i> FILTER
-          </button>
-          <div class="dropdown-menu">
+            <input type="search" name="name" class="bird" width="200px" results ng-model="searchquery.name" ng-click="searchquery = {name: ''}" style="margin-top: 10px; padding-left: 34px; font-family: FontAwesome, 'Open Sans', Verdana, sans-serif;" placeholder="SEARCH RESTAURANTS">
+          </input>
+        </div>
+        <div class="btn-group inner-addon left-addon" style="float: left;">
+          <a href="" class="search-icon" tabindex="-1">
+              <i class="fa fa-angle-down"></i>
+          </a>
+          <input type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="FILTER" style="padding-left: 28px; margin-top: 10px;">
+          </input>
+          <div class="dropdown-menu filter-dropdown">
             <a class="dropdown-item" href="#/" ng-click="myFilter = {}">No Filter</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#/" ng-click="myFilter = {rating: 5}">Rating: 5 Stars</a>
@@ -32,18 +36,19 @@
         </div>
       </li>
     </ul>
-    <ul class="nav navbar-nav pull-xs-right">
+    <ul class="nav navbar-nav float-lg-right" style="float: none;">
       <li class="nav-item" style="margin-left: 0px; margin-top: 10px;">
         <div class="dropdown" ng-controller="LoginController">
-          <img type="image" ng-src="{{getUrl()}}" width="40px" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="User Avatar" style="border-radius: 40px;">
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <span ng-show="getLoggedIn()"><a class="dropdown-header" style="font-size: 1rem;">{{getCurrentUser()}}</a></span>
+          <input type="image" name="name" value="" ng-src="{{getUrl()}}" width="40px" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="User Avatar" style="border-radius: 40px;">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-header" href="" ng-show="getLoggedIn()" style="font-size: 1rem;">{{getCurrentUser()}}</a>
             <div  ng-show="getLoggedIn()" class="dropdown-divider"></div>
-            <span ng-show="!getLoggedIn()" ng-click="login()"><a class="dropdown-item">Sign In</a></span>
-            <span ng-show="getLoggedIn()" ng-click="logout()"><a class="dropdown-item">Sign Out</a></span>
+            <a class="dropdown-item" href="" ng-show="!getLoggedIn()" ng-click="login()">Sign In</a>
+            <a class="dropdown-item" href="" ng-show="getLoggedIn()" ng-click="logout()">Sign Out</a>
           </div>
         </div>
       </li>
     </ul>
   </div>
+</div>
 </nav>

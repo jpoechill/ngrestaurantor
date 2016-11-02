@@ -8,50 +8,41 @@
 
 // Nav Bar
 .navbar {
-  background-color: white !important;
-  text-align: center;
+  // background-color: white !important;
+  // text-align: center;
   padding: 7px;
 }
 
 .nav-link {
   color: #222328;
   font-size: .8em;
-  // vertical-align: bottom;
 }
 
 .navbar-brand, a {
   color: #222328;
 }
 
-// .pull-xs-right {
-//   margin-top: 14px;
-// }
-
 nav {
   border-bottom: 1px solid;
   border-color: #F0F2F7;
 }
 .navbar-brand {
-  // position: absolute;
-  width: 100%;
-  left: 0;
-  // text-align: center;
-  margin:0 auto;
-  // border-bottom: 1px solid;
-  // border-color: #F0F2F7;
+  // width: 100%;
+  // left: 0;
+  // margin:0 auto;
 }
 
-@media (min-width: 768px) {
-  .navbar .navbar-nav {
-      display: inline-block;
-      float: none;
-      vertical-align: top;
-  }
-
-  .navbar .navbar-collapse {
-      text-align: right;
-  }
-}
+// @media (min-width: 768px) {
+//   .navbar .navbar-nav {
+//       display: inline-block;
+//       float: none;
+//       vertical-align: top;
+//   }
+//
+//   .navbar .navbar-collapse {
+//       text-align: right;
+//   }
+// }
 
 /* enable absolute positioning */
 .inner-addon {
@@ -68,7 +59,7 @@ nav {
 }
 
 /* align icon */
-.left-addon .fa  { left:  3px; top: 9px;}
+.left-addon .fa  { left:  3px; top: 10px;}
 
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
@@ -78,9 +69,7 @@ nav {
 }
 
 .h5 {
-  // display: inline;
   font-size: 1.25rem;
-  // margin-top: 10.67em;
   margin-bottom: 1.67em;
   margin-left: 0;
   margin-right: 0;
@@ -98,8 +87,8 @@ nav {
 
 // Inputs
 input[type=search] {
-    // width: 100%;
-    width: 400px;
+    width: 360px;
+    -webkit-backface-visibility: hidden;
     letter-spacing: 1px;
     padding: 8px 20px;
     // margin: 8px 0;
@@ -116,7 +105,6 @@ input[type=search] {
 }
 
 input[type=button] {
-    // width: 15%;
     font-size: 10px;
     letter-spacing: 1px;
     padding: 8px 20px;
@@ -128,11 +116,9 @@ input[type=button] {
     border-radius: 100px;
     font-weight: 700;
     font-family: FontAwesome, 'Open Sans', sans-serif !important;
-    /* box-sizing: border-box; */
 }
 
 button {
-  // width: 15%;
   font-size: 10px;
   letter-spacing: 1px;
   padding: 8px 20px;
@@ -144,46 +130,33 @@ button {
   border-radius: 100px;
   font-weight: 700;
   font-family: FontAwesome, 'Open Sans', sans-serif !important;
-  /* box-sizing: border-box; */
 }
 
-// button {
-//   width: 15%;
-//   font-size: 10px;
-//   letter-spacing: 1px;
-//   padding: 8px 20px;
-//   margin: 10px 0;
-//   border-color: black;
-//   border: 1px solid #E3E8F0;
-//   color: #b0b0b0;
-//   background-color: #F0F2F7;
-//   border-radius: 100px;
-//   font-weight: 700;
-//   font-family: FontAwesome, 'Open Sans', sans-serif !important;
-//   /* box-sizing: border-box; */
-// }
+.myButton:focus {
+  background-color: #e8e8e8;
+  color: white;
+  border: 0px;
+}
 
-// Remove caret from dropdown
-.dropdown-toggle:after{
- display:none;
+
+button:hover, button:focus {
+  outline: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 // Restaurant item components on main page
 .restaurant-item {
     margin-bottom: 30px;
     background-color: white;
-    // border-radius: 10px;
     height: 100%;
     min-height: 300px;
     overflow: hidden;
-    // color: #D1D3D9;
     color: #373a3c;
     padding-top: 20px;
-    // font-weight: 300;
     font-size: 1rem;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     line-height: 1.5;
-    // letter-spacing: 1px;
     border-radius: 4px;
     padding: 0px;
     box-shadow: 0px 10px 12px #888888;
@@ -205,27 +178,16 @@ button {
     margin-bottom: 30px;
     background-color: white;
     border-radius: 4px;
-    // height: 1750px;
     height: 100%;
     overflow: auto;
-    // color: #D1D3D9;
     color: #373a3c;
     padding-top: 20px;
-    // font-weight: 300;
     font-size: 1rem;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     line-height: 1.5;
-    // letter-spacing: 1px;
     padding: 0px;
     box-shadow: 0px 10px 12px #888888;
 }
-//
-// .monty-font-reg {
-//   color: #B9BED1;
-//   font-size: small;
-//   font-weight: 100;
-//   font-family: 'Montserrat', sans-serif !important;
-// }
 
 .monty-font-reg {
   color: #B9BED1;
@@ -243,6 +205,11 @@ button {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
+.filter-dropdown {
+  position: absolute !important;
+}
+
+// Adjust responsive images on main page to fit cards
 @media (min-width: 480px){
   .my-img {
       max-height: 800px;
@@ -251,19 +218,29 @@ button {
 
 @media (min-width: 768px){
   .my-img {
-      max-height: 380px;
+    max-height: 380px;
+  },
+  .col-md-3 {
+    max-height: 380px;
   }
 }
 
 @media (min-width: 992px){
   .my-img {
       max-height: 330px;
+
+  },
+  .col-md-3 {
+    max-height: 330px;
   }
 }
 
 @media (min-width: 1200px){
   .my-img {
       max-height: 300px;
+  },
+  .col-md-3 {
+    max-height: 300px;
   }
 }
 
@@ -281,16 +258,13 @@ button {
 }
 
 #restaurant-image {
-  // background: url('../img/rest_img.jpg') no-repeat center center;
   height: 100%;
-  // width: auto;
-  // overflow: hidden;
 }
 .carousel-caption {
   bottom: 80px;
 }
 
-// Global html compo
+// Global html components
 table {
     max-width: 100%;
     background-color: rgba(0,0,0, 0.6) !important;
@@ -313,4 +287,31 @@ body {
 
 body, html {
   height: 100%;
+}
+
+.navbar {
+  padding: .22rem !important;
+  background-color: #fff!important;
+}
+
+.navbar-toggler:hover, .navbar-toggler:visited, .navbar-toggler:active, .navbar-toggler:link, {
+  // color: blue;
+}
+
+.image_full {
+  display:block;
+}
+
+.image_mobile {
+  display: none;
+}
+
+@media (max-width: 640px) and (min-width: 320px){
+  .image_full{
+   display:none;
+  }
+
+  .image_mobile{
+   display:block;
+  }
 }
