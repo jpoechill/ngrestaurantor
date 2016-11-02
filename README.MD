@@ -1,16 +1,16 @@
-# Bart App
+# Restaurant Reviewer App
 
-An offline-first app that allows users to select and display BART station train departure and arrival times.
+A restaurant reviewer app with a primary focus on accessibility for users with special needs. This application is fully functional with screen readers and pays attention to readability and visible color contrasts.
 
-Topics covered: Service workers, indexedDB (with Dexie.js), BART API.
+Topics covered: Accessibility, Javascript Frameworks
 
 ## To install modules:
 1. Run `npm install` in your command line.
 
-## To run app in development mode from development folder:
+## To run app in development mode:
 1. Enter `gulp serve` from the command line.
 2. Enjoy app.
 
-## To run app in production mode from production folder:
-1. Enter `gulp serve:build` from the command line.
+## To run app in production mode:
+1. Enter `gulp serve:dist` from the command line.
 2. Enjoy app.
