@@ -23,7 +23,7 @@
           <div class="col-md-9" style="margin-bottom: 18px;">
             <p style="margin-top: 16px; margin-bottom: 0px;">
               <span class="h5" style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong>{{thisRestr.name}}</strong></span>
-              <span class="pull-right"><span style="color: #4BE1AB;">{{showReviewStars(thisRestr.rating)}}</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{thisRestr.rating}}</span> <span class="monty-font-reg">{{thisRestr.reviews.length}} REVIEWS</span></span>
+              <span class="pull-right"><span style="color: #305a72;">{{showReviewStars(thisRestr.rating)}}</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{thisRestr.rating}}</span> <span class="monty-font-reg">{{thisRestr.reviews.length}} REVIEWS</span></span>
             </p>
             <p style="margin-top: 6px; margin-bottom: 0px;">
               <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
@@ -34,11 +34,11 @@
             <p>
               {{thisRestr.blurb}}
             </p>
-            <!-- <span class="monty-font-reg"><i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i> {{thisRestr.likes}}</li></span> -->
             <div class="monty-font-reg" style="text-decoration: none">
-              <a href="" class="monty-font-reg">
-                <i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i></a>
-                 {{thisRestr.likes}}
+              <div class="monty-font-reg" style="display: inline;">
+                <i class="fa fa-heart" aria-hidden="true" ng-class="{liked: thisRestr.liked == true}" ng-click="addLikes(getRestID(page.pagename))"></i>
+              </div>
+              {{thisRestr.likes}}
             </div>
 
           </div>
@@ -65,7 +65,7 @@
 
           <p style="text-align: center; padding-top: 0px; padding-bottom: 14px;">
                     {{isSignedIn}}
-            <span style="font-family: 'Montserrat', sans-serif; color: #222328; font-size: 16px; font-weight: 700;">{{thisRestr.reviews.length}} Reviews</span>
+            <span style="font-family: 'Montserrat', sans-serif; color: #305a72; font-size: 16px; font-weight: 700;">{{thisRestr.reviews.length}} Reviews</span>
           </p>
 
           <!--  Start single reviews -->
@@ -74,14 +74,14 @@
               <img ng-src="{{review.img}}" style="float: right; border-radius: 40px;" width="40px" alt="Reviewer Avatar" />
             </div>
             <div class="col-lg-7">
-              <span style="color: #4BE1AB;">{{showReviewStars(review.rating)}}</span><br>
-              <small><strong>{{review.author}}</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{review.dateposted}}</span><br>
+              <span style="color: #275c58;">{{showReviewStars(review.rating)}}</span><br>
+              <small><strong>{{review.author}}</strong></small> <span class="pull-right" style="color: #464d6b; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{review.dateposted}}</span><br>
               <span style="color: 34A526E; font-size: 14px;">
               {{review.review}}</span>
             </div>
           </div>
           <!--  End single reviews -->
-          
+
           <!-- Start New Comments Form -->
           <div ng-show="isSignedIn() && !thisRestr.reviewed">
             <div class="row" style="margin-bottom: 4px;">
@@ -100,7 +100,7 @@
                 <!-- <span class="disable-text-selection" style="color: #4BE1AB;" ng-click="clickedStars()">{{showCurrentRating(currentRating)}}</span> <br> -->
                 <!-- <small><strong>Srikant Ramakrishnan</strong></small> <span style="color: #B9BED1; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 minutes ago</span><br> -->
                 <!-- <span style="font-size: 14px;"> -->
-                <textarea name="name" rows="8" cols="40" style="margin-top: 8px; font-size: 14px; width: 100%; background-color: #F0F2F7; color: #b0b0b0; padding: 8px; border: 1px solid #E3E8F0;" ng-model="myReview"></textarea>
+                <textarea name="name" rows="8" cols="40" aria-label="Leave New Review" style="margin-top: 8px; font-size: 14px; width: 100%; background-color: #F0F2F7; color: #b0b0b0; padding: 8px; border: 1px solid #E3E8F0;" ng-model="myReview"></textarea>
                 <button id="publishBtn" class="pull-right" type="button" name="button" style="width: 20%; margin-top: 10px;" ng-click="writeReview(getRestID(page.pagename))">PUBLISH</button>
               </div>
             </div>
