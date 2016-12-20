@@ -6,16 +6,16 @@
       <div class="col-lrg-12 restaurant-item-2">
         <div>
           <div class="col-md-3" style="padding: 0px;">
-            <img src="img/footsteps-1.png" width="100%" alt="{{thisRestr.name}} Thumbnail 1" />
+            <img src="img/food/foodie-7.jpg" width="100%" alt="{{thisRestr.name}} Thumbnail 1" />
           </div>
           <div class="col-md-3" style="padding: 0px;">
-            <img src="img/food/salad_cut-2.png" width="100%" alt="{{thisRestr.name}} Thumbnail 2" />
+            <img src="img/food/foodie-6.jpg" width="100%" alt="{{thisRestr.name}} Thumbnail 2" />
           </div>
           <div class="col-md-3" style="padding: 0px;">
-            <img src="img/food/salad_cut-2.png" width="100%" alt="{{thisRestr.name}} Thumbnail 3" />
+            <img src="img/food/foodie-5.jpg" width="100%" alt="{{thisRestr.name}} Thumbnail 3" />
           </div>
           <div class="col-md-3" style="padding: 0px;">
-            <img src="img/food/salad_cut-2.png" width="100%" alt="{{thisRestr.name}} Thumbnail 4" />
+            <img src="img/food/foodie-4.jpg" width="100%" alt="{{thisRestr.name}} Thumbnail 4" />
           </div>
         </div>
 
@@ -23,7 +23,7 @@
           <div class="col-md-9" style="margin-bottom: 18px;">
             <p style="margin-top: 16px; margin-bottom: 0px;">
               <span class="h5" style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong>{{thisRestr.name}}</strong></span>
-              <span class="pull-right"><span style="color: #305a72;">{{showReviewStars(thisRestr.rating)}}</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{thisRestr.rating}}</span> <span class="monty-font-reg">{{thisRestr.reviews.length}} REVIEWS</span></span>
+              <span class="pull-right"><span style="color: #00E2AA;">{{showReviewStars(thisRestr.rating)}}</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{thisRestr.rating}}</span> <span class="monty-font-reg">{{thisRestr.reviews.length}} REVIEWS</span></span>
             </p>
             <p style="margin-top: 6px; margin-bottom: 0px;">
               <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
@@ -65,7 +65,7 @@
 
           <p style="text-align: center; padding-top: 0px; padding-bottom: 14px;">
                     {{isSignedIn}}
-            <span style="font-family: 'Montserrat', sans-serif; color: #305a72; font-size: 16px; font-weight: 700;">{{thisRestr.reviews.length}} Reviews</span>
+            <span style="font-family: 'Montserrat', sans-serif; color: #222328; font-size: 16px; font-weight: 700;">{{thisRestr.reviews.length}} Reviews</span>
           </p>
 
           <!--  Start single reviews -->
@@ -74,7 +74,7 @@
               <img ng-src="{{review.img}}" style="float: right; border-radius: 40px;" width="40px" alt="Reviewer Avatar" />
             </div>
             <div class="col-lg-7">
-              <span style="color: #305a72;">{{showReviewStars(review.rating)}}</span><br>
+              <span style="color: #00E2AA;">{{showReviewStars(review.rating)}}</span><br>
               <small><strong>{{review.author}}</strong></small> <span class="pull-right" style="color: #464d6b; font-size: 12px; font-weight: 400;"><i class="fa fa-clock-o" aria-hidden="true"></i> {{review.dateposted}}</span><br>
               <span style="color: 34A526E; font-size: 14px;">
               {{review.review}}</span>

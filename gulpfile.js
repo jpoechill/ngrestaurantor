@@ -117,9 +117,9 @@ gulp.task('move-sw', function() {
 
 // Move templates
 gulp.task('move-templates:dist', function() {
-    gulp.src('dev/views/**/*')
+    gulp.src('dev/templates/**/*')
     // Perform minification tasks, etc here
-    .pipe(gulp.dest('dist/views'));
+    .pipe(gulp.dest('dist/templates'));
 });
 
 // Move data
