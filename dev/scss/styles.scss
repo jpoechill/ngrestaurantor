@@ -190,7 +190,7 @@ button:hover, button:focus {
 }
 
 .monty-font-reg {
-  color: #305a72;
+  color: #888c9c;
   font-size: small;
   font-weight: 400;
   letter-spacing: 1.5px;
@@ -209,7 +209,7 @@ button:hover, button:focus {
   position: absolute !important;
 }
 
-// Adjust responsive images on main page to fit cards
+// Adjust responsive images on page to fit cards
 @media (min-width: 480px){
   .my-img {
       max-height: 800px;

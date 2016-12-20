@@ -117,9 +117,23 @@ gulp.task('move-sw', function() {
 
 // Move templates
 gulp.task('move-templates:dist', function() {
-    gulp.src('dev/templates/**/*')
+    gulp.src('dev/views/**/*')
     // Perform minification tasks, etc here
-    .pipe(gulp.dest('dist/templates'));
+    .pipe(gulp.dest('dist/views'));
+});
+
+// Move data
+gulp.task('move-data:dist', function() {
+    gulp.src('dev/data/**/*')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('dist/data'));
+});
+
+// Move fonts
+gulp.task('move-fonts:dist', function() {
+    gulp.src('dev/fonts/**/*')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('dist/fonts'));
 });
 
 // gulp.task('move-js:dist', function() {
@@ -148,7 +162,7 @@ gulp.task('serve', function (callback) {
 // Dist
 gulp.task('serve:dist', function(callback) {
     runSequence('clean:dist',
-        ['useref:dist', 'move-templates:dist', 'images'],
+        ['useref:dist', 'move-templates:dist', 'move-data:dist', 'move-fonts:dist', 'images'],
         'browser-sync:dist',
         callback
     );

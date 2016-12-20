@@ -6,14 +6,14 @@
       <article>
         <div class="col-lg-12 restaurant-item" ng-repeat="restaurant in restaurants | filter:searchquery.name | filter:myFilter">
           <div class="col-md-3 fill restaurant-image">
-            <a href="#/{{restaurant.link}}" tabindex="-1"><img src="img/food/salad_cut-4.png" alt="{{restaurant.name}} Thumbnail" class="my-img" style="width: auto; height: 100%;"/></a>
+            <a href="#/{{restaurant.link}}" tabindex="-1"><img src="{{restaurant.photo}}" alt="{{restaurant.name}} Thumbnail" class="my-img" style="width: auto; height: 100%;"/></a>
           </div>
           <div class="col-md-9" style="height: 100%; padding: 30px">
             <div class="" style="display: inline-block;">
-              <h5 style="font-family: 'Montserrat', sans-serif; color: #222328;"><strong><a href="#/{{restaurant.link}}" style="text-decoration: none;">{{restaurant.name}}</a></strong></h5>
+              <h5 style="font-family: 'Montserrat', sans-serif; color: #657FCE;"><strong><a href="#/{{restaurant.link}}" style="text-decoration: none;">{{restaurant.name}}</a></strong></h5>
             </div>
             <div class="pull-right">
-              <span style="color: #305a72;" aria-hidden="true">{{showReviewStars(restaurant.rating)}}</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{restaurant.rating}}</span> <span class="monty-font-reg">{{restaurant.reviews.length}} REVIEWS</span>
+              <span style="color: #00E2AA;" aria-hidden="true">{{showReviewStars(restaurant.rating)}}</span> <span style="color: #4C5263; font-size: small; font-weight: bold; padding: 0px 10px 0px 10px">{{restaurant.rating}}</span> <span class="monty-font-reg">{{restaurant.reviews.length}} REVIEWS</span>
             </div>
             <br>
             <ul class="monty-font-reg" style="margin: 0; padding: 0; list-style-type: none;">
